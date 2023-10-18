@@ -15,7 +15,6 @@ import CaprinoOvinoPolygon from "./components/Poligonos/CaprinoOvinoPolygon";
 import GadoCortePolygon from "./components/Poligonos/GadoCortePolygon";
 import CampusPolygon from "./components/Poligonos/CampusPolygon";
 const { BaseLayer, Overlay } = LayersControl;
-/*npm install @mui/material @mui/icons-material https://mui.com/material-ui/react-drawer/*/
 
 function App() {
   return (
