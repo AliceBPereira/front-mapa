@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import markeredificios from "../../icones.png/pino-de-localizacao.png";
-import imgPredioH from "../../ImgLugares/PredioH.png";
-import { buildingMarkers } from '../../Informations/markers'
+import { api } from "../../lib/axios";
 
 const Iconlugar = new L.Icon({
   iconUrl: markeredificios,
@@ -12,25 +11,59 @@ const Iconlugar = new L.Icon({
   iconSize: [32, 32],
 });
 
-
 const LocalMarkers = () => {
-  
+  console.log(useState)
+
+  const [predios, setPredios] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  const requestPredios = async () => {
+    setLoading(true)
+    try {
+      const response = await api.get('/predios')
+      setPredios(response.data.predios)
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    requestPredios()
+  }, [])
+
+  if(loading) {
+    return <></>
+  }
 
   return (
-    <>     
-      { buildingMarkers.map((building) => {
+    <>
+      { predios.map((predio) => {
         return (
-          <Marker icon={Iconlugar} position={building.coord}>
-            <Popup>{building.name} <div className="pop-up-container">
-          <img src={imgPredioH} alt="Prédio H" />
-        </div></Popup>
+          <Marker icon={Iconlugar}  positions={predio.localizacao}>
+            <Popup>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
+                <div>
+                  <strong>Predio:</strong>
+                  <span>{predio.nome}</span>
+                </div>
+                <div>
+                  <strong>Área em Hectares: </strong>
+                  <span>{predio.area_ha}</span>
+    
+                </div>
+              </div> 
+            </Popup>
           </Marker>
         )
-      }) }
-
-      
+      }) }    
     </>
   );
 };
+
 
 export default LocalMarkers;

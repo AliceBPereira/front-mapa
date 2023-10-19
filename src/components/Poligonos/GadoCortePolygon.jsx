@@ -40,15 +40,15 @@ const GadoCortePolygon = () => {
                 flexDirection: 'column'
               }}>
                 <div>
-                  <strong>Nome_pasto:</strong>
+                  <strong>Nome do Pasto:</strong>
                   <span>{gadoCorte.Nome_pasto}</span>
                 </div>
                 <div>
-                  <strong>ÁREA EM HECTARES: </strong>
+                  <strong>Área em Hectares: </strong>
                   <span>{gadoCorte.area_ha}</span>
                   <strong>Forrageira: </strong>
                   <span>{gadoCorte.Forrageira}</span>
-                  <strong>Raca: </strong>
+                  <strong>Raça: </strong>
                   <span>{gadoCorte.Raca}</span>
                   <strong>Pastejo: </strong>
                   <span>{gadoCorte.Pastejo}</span>

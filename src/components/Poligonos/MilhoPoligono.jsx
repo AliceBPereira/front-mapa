@@ -42,16 +42,26 @@ const MilhoPolygons = () => {
                 flexDirection: 'column'
               }}>
                 <div>
-                  <strong>TALHÃO:</strong>
+                  <strong>Talhão:</strong>
                   <span>{milho.talhao}</span>
                 </div>
                 <div>
-                  <strong>ÁREA EM HECTARES: </strong>
+                  <strong>Área em Hectares: </strong>
                   <span>{milho.area_ha}</span>
-                  <strong>espacament: </strong>
+                  <strong>Espaçamento: </strong>
                   <span>{milho.espacament}</span>
-                  <strong>sist_plant: </strong>
+                  <strong>Sistema de plantação: </strong>
                   <span>{milho.sist_plant}</span>
+                  <strong>Sementes: </strong>
+                  <span>{milho.sementes}</span>
+                  <strong>Produção tha: </strong>
+                  <span>{milho.prod_tha}</span>
+                  <strong>Produção de 2020: </strong>
+                  <span>{milho.prod_2020}</span>
+                  <strong>Plantio de 2021: </strong>
+                  <span>{milho.plantio_21}</span>
+                  <strong>Plantio de 2020: </strong>
+                  <span>{milho.plantio_20}</span>
                 </div>
               </div> 
             </Popup>

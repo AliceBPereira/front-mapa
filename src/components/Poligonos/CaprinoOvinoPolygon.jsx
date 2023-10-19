@@ -40,18 +40,12 @@ const CaprinoOvinoPolygon = () => {
                 flexDirection: 'column'
               }}>
                 <div>
-                  <strong>Nome_pasto:</strong>
-                  <span>{caprinoOvino.Nome_pasto}</span>
+                  <strong>Talhão:</strong>
+                  <span>{caprinoOvino.talhao}</span>
                 </div>
                 <div>
-                  <strong>ÁREA EM HECTARES: </strong>
+                  <strong>Árae em Hectares: </strong>
                   <span>{caprinoOvino.area_ha}</span>
-                  <strong>Forrageira: </strong>
-                  <span>{caprinoOvino.Forrageira}</span>
-                  <strong>Raca: </strong>
-                  <span>{caprinoOvino.Raca}</span>
-                  <strong>Pastejo: </strong>
-                  <span>{caprinoOvino.Pastejo}</span>
                 </div>
               </div> 
             </Popup>

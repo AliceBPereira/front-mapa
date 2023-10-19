@@ -44,13 +44,13 @@ const GadoLeitePolygons = () => {
                   <span>{gadoLeite.Piquete}</span>
                 </div>
                 <div>
-                  <strong>ÁREA EM HECTARES: </strong>
+                  <strong>Área em Hectares: </strong>
                   <span>{gadoLeite.area_ha}</span>
                   <strong>Forrageira: </strong>
                   <span>{gadoLeite.Forrageira}</span>
-                  <strong>Raca: </strong>
+                  <strong>Raça: </strong>
                   <span>{gadoLeite.Raca}</span>
-                  <strong>Estagio: </strong>
+                  <strong>Estágio: </strong>
                   <span>{gadoLeite.Estagio}</span>
                   <strong>Pastejo: </strong>
                   <span>{gadoLeite.Pastejo}</span>

@@ -43,16 +43,20 @@ const CafePolygons = () => {
                 flexDirection: 'column'
               }}>
                 <div>
-                  <strong>TALHÃO:</strong>
+                  <strong>Talhão:</strong>
                   <span>{coffee.talhao}</span>
                 </div>
                 <div>
-                  <strong>ÁREA EM HECTARES: </strong>
+                  <strong>Área em Hectares: </strong>
                   <span>{coffee.area_ha}</span>
-                  <strong>espacament: </strong>
+                  <strong>Espaçamento: </strong>
                   <span>{coffee.espacament}</span>
-                  <strong>estande: </strong>
+                  <strong>Estande: </strong>
                   <span>{coffee.estande}</span>
+                  <strong>Numero de Plantas: </strong>
+                  <span>{coffee.n_de_plantas}</span>
+                  <strong>Ano de Plantio: </strong>
+                  <span>{coffee.ano_plantio}</span>
                 </div>
               </div> 
             </Popup>
