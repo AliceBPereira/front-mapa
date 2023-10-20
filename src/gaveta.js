@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react'; // Adicione estas importações
+import { useState, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -24,72 +24,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const GadoCorteButtons = () => {
-  console.log(useState);
-
-  const [gadosCorte, setGadosCorte] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [selectedGadoCorte, setSelectedGadoCorte] = useState(null);
-
-  const requestGadosCorte = async () => {
-    setLoading(true);
-    try {
-      const response = await api.get('/gadosCorte');
-      setGadosCorte(response.data.gadosCorte);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    requestGadosCorte();
-  }, []);
-
-  if (loading) {
-    return <></>;
-  }
-
-  const handleGadoCorteClick = (gadoCorte) => {
-    setSelectedGadoCorte(gadoCorte);
-  };
-
-  return (
-    <>
-      {gadosCorte.map((gadoCorte, index) => (
-        
-        <Button
-          key={index}
-          variant="contained"
-          color="primary"
-          onClick={() => handleGadoCorteClick(gadoCorte)}
-        >
-          {gadoCorte.Nome_pasto}
-        </Button>
-      ))}
-      {selectedGadoCorte && (
-        <div>
-          <GraficoCafe></GraficoCafe>
-          <strong>Nome_pasto:</strong>
-          <span>{selectedGadoCorte.Nome_pasto}</span>
-          <strong>ÁREA EM HECTARES: </strong>
-          <span>{selectedGadoCorte.area_ha}</span>
-          <strong>Forrageira: </strong>
-          <span>{selectedGadoCorte.Forrageira}</span>
-          <strong>Raca: </strong>
-          <span>{selectedGadoCorte.Raca}</span>
-          <strong>Pastejo: </strong>
-          <span>{selectedGadoCorte.Pastejo}</span>
-        </div>
-      )}
-    </>
-  );
-};
-
 export default function Gaveta() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [graficoOpen, setGraficoOpen] = React.useState(false); // Estado para controlar a abertura do gráfico
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,11 +37,15 @@ export default function Gaveta() {
     setOpen(false);
   };
 
+  const toggleGrafico = () => {
+    setGraficoOpen(!graficoOpen); // Alternar entre abrir e fechar o gráfico
+  };
+
   return (
     <Box sx={{ display: 'flex', position: 'absolute', zIndex: 9999, top: '15%', left: '15px' }}>
       <CssBaseline />
       <IconButton
-        color="primary" // Corrija a cor para 'primary'
+        color="primary"
         aria-label="open drawer"
         onClick={handleDrawerOpen}
         edge="start"
@@ -131,9 +73,16 @@ export default function Gaveta() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <GadoCorteButtons />
+        <Button onClick={toggleGrafico}>Abrir/Fechar Gráfico</Button>
         <Divider />
       </Drawer>
+
+      {/* Renderiza o gráfico quando o estado graficoOpen for verdadeiro */}
+      {graficoOpen && (
+        <div>
+          <GraficoCafe />
+        </div>
+      )}
     </Box>
   );
 }
