@@ -9,7 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Button from '@mui/material/Button'; // Importe o componente Button do Material-UI
+import Button from '@mui/material/Button';
+import GraficoCafe from './components/Graficos/graficoCafe';
 import { api } from "../src/lib/axios";
 
 const drawerWidth = 240;
@@ -57,6 +58,7 @@ const GadoCorteButtons = () => {
   return (
     <>
       {gadosCorte.map((gadoCorte, index) => (
+        
         <Button
           key={index}
           variant="contained"
@@ -68,6 +70,7 @@ const GadoCorteButtons = () => {
       ))}
       {selectedGadoCorte && (
         <div>
+          <GraficoCafe></GraficoCafe>
           <strong>Nome_pasto:</strong>
           <span>{selectedGadoCorte.Nome_pasto}</span>
           <strong>ÁREA EM HECTARES: </strong>

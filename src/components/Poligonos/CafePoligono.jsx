@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
-
+import GraficoCafe from "../Graficos/graficoCafe";
 import { coffePolygon } from "../../Informations/coffePolygon";
 import { api } from "../../lib/axios";
 
@@ -38,6 +38,7 @@ const CafePolygons = () => {
         return (
           <Polygon pathOptions={greenOptions}  positions={coffee.localizacao?.coordenadas}>
             <Popup>
+          
               <div style={{
                 display: 'flex',
                 flexDirection: 'column'
