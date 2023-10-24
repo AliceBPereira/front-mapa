@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import Button from '@mui/material/Button';
+
 import GraficoCafe from './components/Graficos/graficoCafe';
 
 
@@ -45,7 +45,7 @@ export default function Gaveta() {
     <Box sx={{ display: 'flex', position: 'absolute', zIndex: 9999, top: '15%', left: '15px' }}>
       <CssBaseline />
       <IconButton
-        color="primary"
+        color="black"
         aria-label="open drawer"
         onClick={handleDrawerOpen}
         edge="start"
@@ -73,7 +73,7 @@ export default function Gaveta() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <Button onClick={toggleGrafico}>Abrir/Fechar Gráfico</Button>
+        <li><a href="/CafePage">Detalhes</a></li>
         <Divider />
         <Divider />
       

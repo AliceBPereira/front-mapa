@@ -1,9 +1,14 @@
 import React from 'react';
 import { router } from "./routes";
-import { RouterProvider } from 'react-router-dom';
+import { BrowserRouter,RouterProvider , Routes} from 'react-router-dom';
+import Header from './Layout/header';
+
 
 export default function App() {
    return (
-      <RouterProvider router={router} />
+      <RouterProvider router={router} >
+         
+        
+      </RouterProvider>
    );
 }

@@ -1,52 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
 import { api } from "../../lib/axios";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 const greenOptions = { color: "green" };
 
 const CafePolygons = () => {
-  console.log(useState)
+  console.log(useState);
 
-  const [cafes, setCafes] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [cafes, setCafes] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const requestCafes = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const response = await api.get('/cafes')
-      setCafes(response.data.cafes)
+      const response = await api.get("/cafes");
+      setCafes(response.data.cafes);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    requestCafes()
-  }, [])
+    requestCafes();
+  }, []);
 
-  if(loading) {
-    return <></>
+  if (loading) {
+    return <></>;
   }
 
   return (
     <>
-      { cafes.map((coffee) => {
+      {cafes.map((coffee) => {
         return (
-          <Polygon pathOptions={greenOptions}  positions={coffee.localizacao?.coordenadas}>
+          <Polygon
+            pathOptions={greenOptions}
+            positions={coffee.localizacao?.coordenadas}
+          >
             <Popup>
-          
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column'
-              }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <div>
-                <li>
-            <Link to="/details">Sobre</Link>
-          </li>
+                  <Link to="/CafePage" style={{ textDecoration: "none" }}>
+                    <button
+                      style={{
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                      }}
+                    >
+                      CafePage
+                    </button>
+                  </Link>
                 </div>
                 <div>
                   <strong>Talhão:</strong>
@@ -64,11 +76,11 @@ const CafePolygons = () => {
                   <strong>Ano de Plantio: </strong>
                   <span>{coffee.ano_plantio}</span>
                 </div>
-              </div> 
+              </div>
             </Popup>
           </Polygon>
-        )
-      }) }    
+        );
+      })}
     </>
   );
 };

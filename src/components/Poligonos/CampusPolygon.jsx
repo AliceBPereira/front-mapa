@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Polygon } from "react-leaflet";
-import { CampusInfo } from "../../Informations/CampusInfo";
 import { api } from "../../lib/axios";
 
 

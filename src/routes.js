@@ -3,7 +3,7 @@ import {
 } from "react-router-dom";
 
 import Map from "./pages_/map";
-import Details from "./pages_/details"
+import CafePage from "./pages_/CafePage/cafePage"
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
     element: Map(),
   },
   {
-    path: "/details",
-    element: Details( ),
+    path: "/CafePage",
+    element: CafePage( ),
   },
 ]);

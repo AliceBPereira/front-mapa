@@ -19,6 +19,7 @@
     "leaflet-styleeditor": "^0.1.21",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
+    "react-dimmer": "^1.0.7",
     "react-dom": "^18.2.0",
     "react-google-charts": "^4.0.1",
     "react-leaflet": "^4.2.1",
