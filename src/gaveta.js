@@ -12,6 +12,8 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Button from '@mui/material/Button';
 import GraficoCafe from './components/Graficos/graficoCafe';
 import { api } from "../src/lib/axios";
+import { Link } from 'react-router-dom';
+import AppRoutes from "../src/Pages/routes";
 
 const drawerWidth = 240;
 
@@ -74,6 +76,9 @@ export default function Gaveta() {
         </DrawerHeader>
         <Divider />
         <Button onClick={toggleGrafico}>Abrir/Fechar Gráfico</Button>
+        <Divider />
+        <Divider />
+        <Button ><AppRoutes/></Button>
         <Divider />
       </Drawer>
 

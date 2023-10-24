@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
-import GraficoCafe from "../Graficos/graficoCafe";
-import { coffePolygon } from "../../Informations/coffePolygon";
 import { api } from "../../lib/axios";
+import AppRoutes from "../../Pages/routes";
 
 const greenOptions = { color: "green" };
 
@@ -43,6 +42,7 @@ const CafePolygons = () => {
                 display: 'flex',
                 flexDirection: 'column'
               }}>
+                <AppRoutes/>
                 <div>
                   <strong>Talhão:</strong>
                   <span>{coffee.talhao}</span>
