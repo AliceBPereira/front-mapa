@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
 import { api } from "../../lib/axios";
-import AppRoutes from "../../Pages/routes";
+import { Link } from 'react-router-dom';
+
 
 const greenOptions = { color: "green" };
 
@@ -42,7 +43,11 @@ const CafePolygons = () => {
                 display: 'flex',
                 flexDirection: 'column'
               }}>
-                <AppRoutes/>
+                <div>
+                <li>
+            <Link to="/details">Sobre</Link>
+          </li>
+                </div>
                 <div>
                   <strong>Talhão:</strong>
                   <span>{coffee.talhao}</span>
