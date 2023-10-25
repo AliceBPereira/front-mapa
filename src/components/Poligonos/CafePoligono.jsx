@@ -56,7 +56,7 @@ const CafePolygons = () => {
                         cursor: "pointer",
                       }}
                     >
-                      CafePage
+                      Detalhes 
                     </button>
                   </Link>
                 </div>

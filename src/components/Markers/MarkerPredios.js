@@ -41,7 +41,7 @@ const LocalMarkers = () => {
     <>
       { predios.map((predio) => {
         return (
-          <Marker icon={Iconlugar}  positions={predio.localizacao}>
+          <Marker icon={Iconlugar}  position={predio.localizacao}>
             <Popup>
               <div style={{
                 display: 'flex',
