@@ -1,53 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { api } from "../../lib/axios";
 
-function CafeList() {
+export default function Cafes() {
   const [cafes, setCafes] = useState([]);
-  const [talhao, setTalhao] = useState(""); // O talhão a ser filtrado
 
+  const getCafes  = async () => {
+    try {
+      const response = await api.get("/cafes");
+      console.log("Response data:", response.data.cafes);
+      setCafes(response.data.cafes); // Update the state with the fetched data
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   useEffect(() => {
-    // Função para buscar cafés colhidos com base no talhão
-    async function fetchCafes() {
-      try {
-        const response = await fetch(`/api/cafes?talhao=${talhao}&estatuto=COLHIDO`);
-        if (response.ok) {
-          const data = await response.json();
-          setCafes(data.cafés);
-        } else {
-          console.error("Erro ao buscar cafés");
-        }
-      } catch (error) {
-        console.error("Erro ao buscar cafés", error);
-      }
-    }
-
-    // Chame a função de busca quando o talhao mudar
-    if (talhao !== "") {
-      fetchCafes();
-    } else {
-      // Limpe a lista de cafés se o campo do talhão estiver vazio
-      setCafes([]);
-    }
-  }, [talhao]);
+    getCafes ();
+  }, []);
 
   return (
-    <div>
-      <h1>Cafés Colhidos</h1>
-      <input
-        type="text"
-        placeholder="Nome do talhão (por exemplo, T-1)"
-        value={talhao}
-        onChange={(e) => setTalhao(e.target.value)}
-      />
+    <div className="App">
+      <h2>Listagem de cafés</h2>
       <ul>
-        {cafes.map((cafe) => (
-          <li key={cafe.id}>
-            <p>Nome do Talhão: {cafe.talhao}</p>
-            <p>Outras informações do café</p>
-          </li>
-        ))}
+        {Array.isArray(cafes) && cafes.length > 0 ? (
+          cafes.map((cafe) => (
+            <li key={cafe.id}>
+              <Link to={`${cafe.id}/cafes`}>{cafe.talhao}</Link>
+              <br />
+              {cafe.cultivar}
+              <br />
+            </li>
+          ))
+        ) : (
+          <p>No cafes to display.</p>
+        )}
       </ul>
     </div>
   );
+  
 }
-
-export default CafeList;

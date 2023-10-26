@@ -2,7 +2,7 @@ import React from "react";
 import "../map.css";
 import Header from "../../Layout/header";
 import Map from "../map";
-import CafeList from "./grafico";
+import Cafes from "./grafico";
 
 const CafePage = () => {
   const pageStyle = {
@@ -26,7 +26,7 @@ const CafePage = () => {
       <div style={pageStyle}>
         <div style={infoStyle}>
           
-          <CafeList></CafeList>
+          <Cafes></Cafes>
           <h1>Informações</h1>
           <p>Coloque suas informações aqui...</p>
         </div>
