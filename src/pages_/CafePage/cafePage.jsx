@@ -31,7 +31,7 @@ const CafePage = () => {
           <p>Coloque suas informações aqui...</p>
         </div>
         <div style={mapStyle}>
-          <Map></Map>
+         
           {/* Mapa */}
         </div>
       </div>

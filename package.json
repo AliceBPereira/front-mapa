@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
     "chart.js": "^4.4.0",
+    "date-fns": "^2.30.0",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "leaflet-sidebar-v2": "^3.2.3",
@@ -24,6 +25,7 @@
     "react-google-charts": "^4.0.1",
     "react-leaflet": "^4.2.1",
     "react-leaflet-draw": "^0.20.4",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
