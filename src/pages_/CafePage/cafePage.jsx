@@ -3,6 +3,8 @@ import "../map.css";
 import Header from "../../Layout/header";
 import Map from "../map";
 import Cafes from "./grafico";
+import Table from "./table";
+
 
 const CafePage = () => {
   const pageStyle = {
@@ -27,6 +29,8 @@ const CafePage = () => {
         <div style={infoStyle}>
           
           <Cafes></Cafes>
+          <Table></Table>
+ 
           <h1>Informações</h1>
           <p>Coloque suas informações aqui...</p>
         </div>

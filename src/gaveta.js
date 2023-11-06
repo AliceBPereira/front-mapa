@@ -73,10 +73,10 @@ export default function Gaveta() {
           </IconButton>
         </DrawerHeader>
         <Divider />
+
+        <Divider />
+        <Divider />
         <li><a href="/CafePage">Detalhes</a></li>
-        <Divider />
-        <Divider />
-      
         <Divider />
       </Drawer>
 
@@ -89,3 +89,4 @@ export default function Gaveta() {
     </Box>
   );
 }
+<li><a href="/CafePage">Detalhes</a></li>

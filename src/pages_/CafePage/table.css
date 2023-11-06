@@ -1,0 +1,100 @@
+/* Main container */
+body {
+    background-color: #00AA86; /* Green background color */
+    color: #FFFFFF; /* White text color */
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Header */
+  h1 {
+    background-color: #00AA86; /* Green background color */
+    color: #FFFFFF; /* White text color */
+    padding: 10px;
+  }
+  
+  /* Select dropdown */
+  select {
+    background-color: #00AA86; /* Green background color */
+    color: #FFFFFF; /* White text color */
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  /* Input field */
+  input[type="search"] {
+    background-color: #E5E5E5; /* Light gray background color */
+    color: #000000; /* Black text color */
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  /* DataGrid container */
+  .DataGrid {
+    background-color: #FFFFFF; /* White background color */
+    border: 2px solid #000000; /* Black border */
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+  }
+  
+  /* Modal styles */
+  .modal {
+    background-color: #FFFFFF; /* White background color */
+    border: 2px solid #00AA86; /* Green border color */
+    border-radius: 5px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Table header styles */
+  .DataGrid .header {
+    background-color: #00AA86; /* Green background color */
+    color: #FFFFFF; /* White text color */
+  }
+  
+  /* Table row styles */
+  .DataGrid .row {
+    background-color: #E5E5E5; /* Light gray background color */
+    color: #000000; /* Black text color */
+  }
+  
+  /* Selected row styles */
+  .DataGrid .selected-row {
+    background-color: #00AA86; /* Green background color */
+    color: #FFFFFF; /* White text color */
+  }
+  
+  /* Customizing checkbox styles */
+  .MuiCheckbox-root {
+    color: #00AA86; /* Green color for the checkboxes */
+  }
+  
+  .MuiCheckbox-checked {
+    color: #00AA86; /* Green color for checked checkboxes */
+  }
+  
+  /* Customizing pagination styles */
+  .MuiDataGrid-pagination {
+    background-color: #00AA86; /* Green background color */
+  }
+  
+  /* Customizing icons in the pagination component */
+  .MuiDataGrid-pagination .MuiButtonBase-root {
+    color: #FFFFFF; /* White color for the pagination buttons */
+  }
+  
+  /* Modal close button */
+  .close-button {
+    color: #00AA86; /* Green color for the close button */
+  }
+  
