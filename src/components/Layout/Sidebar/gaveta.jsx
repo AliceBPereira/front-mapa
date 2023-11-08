@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-import GraficoCafe from './components/Graficos/graficoCafe';
+import { SidebarData } from "./SidebarData.jsx";
 
 
 const drawerWidth = 240;
@@ -37,12 +37,10 @@ export default function Gaveta() {
     setOpen(false);
   };
 
-  const toggleGrafico = () => {
-    setGraficoOpen(!graficoOpen); // Alternar entre abrir e fechar o gráfico
-  };
+ 
 
   return (
-    <Box sx={{ display: 'flex', position: 'absolute', zIndex: 9999, top: '15%', left: '15px' }}>
+    <Box sx={{ display: 'flex', position: 'absolute', zIndex: 9999, top: '15%', left: '15px'}}>
       <CssBaseline />
       <IconButton
         color="black"
@@ -61,6 +59,7 @@ export default function Gaveta() {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            
           },
         }}
         variant="persistent"
@@ -76,17 +75,33 @@ export default function Gaveta() {
 
         <Divider />
         <Divider />
-        <li><a href="/CafePage">Detalhes</a></li>
+        <div className="sidebar">
+      <ul className="sidebarList">
+        {SidebarData.map((val, key) => {
+          return (
+            <li
+              key={key}
+              className="row"
+              onClick={() => {
+                window.location.pathname = val.link;
+              }}
+            >
+              <div>{val.icon}</div>
+              <div>{val.title}</div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
         <Divider />
       </Drawer>
 
       {/* Renderiza o gráfico quando o estado graficoOpen for verdadeiro */}
       {graficoOpen && (
         <div>
-          <GraficoCafe />
+          
         </div>
       )}
     </Box>
   );
 }
-<li><a href="/CafePage">Detalhes</a></li>

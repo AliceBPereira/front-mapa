@@ -1,9 +1,12 @@
 import React from "react";
-import "../map.css";
-import Header from "../../Layout/header";
-import Map from "../map";
+
+import Header from "../../components/Layout/Header/header";
+import Map from "../Map/map";
 import Cafes from "./grafico";
 import Table from "./table";
+import Sidebar from "../../components/Layout/Sidebar/Sidebar";
+import '../../App.css'
+
 
 
 const CafePage = () => {
@@ -12,24 +15,30 @@ const CafePage = () => {
     flexDirection: "row",
   };
 
-  const infoStyle = {
-    flex: 1,
-    padding: "20px",
-  };
+ const infoStyle = {
+  height: "100px", // Use uma string para especificar a altura com a unidade de medida (por exemplo, "px" para pixels)
+  width: "200px", // Use uma string para especificar a largura com a unidade de medida
+};
 
   const mapStyle = {
     flex: 1,
     height: "400px",
   };
   // Coordenadas iniciais do mapa
-
+  const rowStyle = {
+    display: "flex",
+    justifyContent: "space-between", // Isso irá distribuir os elementos igualmente na linha
+  };
   return (
     <div>
       <div style={pageStyle}>
-        <div style={infoStyle}>
-          
-          <Cafes></Cafes>
-          <Table></Table>
+        <div >
+        <Sidebar></Sidebar>
+        <div style={rowStyle}>
+      
+      <Cafes></Cafes>
+      <Table></Table>
+    </div>
  
           <h1>Informações</h1>
           <p>Coloque suas informações aqui...</p>

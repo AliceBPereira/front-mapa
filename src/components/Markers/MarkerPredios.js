@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import markeredificios from "../../icones.png/pino-de-localizacao.png";
+
 import { api } from "../../lib/axios";
 
 const Iconlugar = new L.Icon({
-  iconUrl: markeredificios,
-  iconRetinaUrl: markeredificios,
+ 
   popupAnchor: [-0, -0],
   iconSize: [32, 32],
 });

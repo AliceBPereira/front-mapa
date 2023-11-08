@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import Map from "./pages_/map";
+import Map from "./pages_/Map/map";
 import CafePage from "./pages_/CafePage/cafePage"
 
 
