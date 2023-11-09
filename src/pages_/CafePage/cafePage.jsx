@@ -6,6 +6,7 @@ import Cafes from "./grafico";
 import Table from "./table";
 import Sidebar from "../../components/Layout/Sidebar/Sidebar";
 import '../../App.css'
+import Cadastro from "../../components/Cadastro/cadastrar"
 
 
 
@@ -33,9 +34,9 @@ const CafePage = () => {
     <div>
       <div style={pageStyle}>
         <div >
-        <Sidebar></Sidebar>
-        <div style={rowStyle}>
-      
+        
+        <div >
+      <Cadastro></Cadastro>
       <Cafes></Cafes>
       <Table></Table>
     </div>
