@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-
 import { api } from "../../lib/axios";
 
-
-const Grafico = () => {
-
-
+const Grafico = ({ talhaoId }) => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
-
 
   const requestCafes = async () => {
     setLoading(true);
@@ -31,18 +26,21 @@ const Grafico = () => {
     return <div>Carregando...</div>;
   }
 
+  // Filtrar os talhões COLHIDOS de acordo com o talhão do ID
+  const filteredCafes = cafes.filter(
+    (cafe) => cafe.status === "COLHIDO" && cafe.talhao && cafe.talhao.id === talhaoId
+  );
+
   // Manipular os dados para o formato desejado
   const chartData = [["Data", "Quantidade Colhida"]];
 
-  cafes.forEach((cafe) => {
-    if (cafe.status === "COLHIDO" && cafe.talhao) {
-      chartData.push([cafe.talhao.data_plantio, cafe.quantidade_colhida]);
-    }
+  filteredCafes.forEach((cafe) => {
+    chartData.push([cafe.talhao.data_plantio, cafe.quantidade_colhida]);
   });
 
   const options = {
     chart: {
-      title: "Quantidade Colhida de Cafés por Data de Plantio",
+      title: `Quantidade Colhida de Cafés para o Talhão ${talhaoId} por Data de Plantio`,
       subtitle: "em unidades",
     },
   };
@@ -56,6 +54,6 @@ const Grafico = () => {
       options={options}
     />
   );
-}
+};
 
 export default Grafico;

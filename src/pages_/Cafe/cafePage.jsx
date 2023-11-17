@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../lib/axios";
 import Map from "../Map/map";
+import Grafico from "./Grafico";
 
 
 const CafePage = () => {
@@ -38,12 +39,13 @@ const CafePage = () => {
       >
         <Map></Map>
       </div>
-<div className="Grafico">
-
-</div>
+      <div className="Grafico">
+        <Grafico talhaoId={coffeeDetails.talhao.id} />
+      </div>
       <div>
         <h1>{coffeeDetails.talhao}</h1>
         <div>
+       
        
           <strong>Área em Hectares: </strong>
           <span>{coffeeDetails.area_ha}</span>
