@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
 import Modal from "react-modal";
-import { Bar } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 
 const modalStyle = {

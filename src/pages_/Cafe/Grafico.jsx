@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Chart } from "react-google-charts";
 
-import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
 
 
@@ -9,7 +9,7 @@ const Grafico = () => {
 
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState("");
+
 
   const requestCafes = async () => {
     setLoading(true);

@@ -1,12 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
-import Sidebar from './components/Layout/Sidebar/Sidebar';
 import Map from './pages_/Map/map';
-import CafePage from './pages_/CafePage/cafePage';
+import CafePage from './pages_/Cafe/cafePage';
 import MilhoPage from './pages_/Milho/milhoPage';
 import CaprinoOvinoPage from './pages_/CaprinoOvino/CaprinoOvinoPage';
 import Header from './components/Layout/Header/header';
+import GadoCortePage from './pages_/GadoCorte/gadoCortePage';
+import GadoLeitePage from './pages_/GadoLeite/gadoLeitePage';
+import PredioPage from './pages_/Predios/Predio';
+import DetalhesListaPage from './pages_/DeatalhesLista/DetalhesListaPage';
+import Gaveta from './components/Layout/Sidebar/gaveta';
+
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +27,24 @@ export const router = createBrowserRouter([
     element: <MilhoPage />,
   },
   {
-    path: '/CAprinoOvinoPage/:id',
+    path: '/CaprinoOvinoPage/:id',
     element: <CaprinoOvinoPage />,
+  },
+  {
+    path: '/GadoCortePage/:id',
+    element: <GadoCortePage />,
+  },
+  {
+    path: '/GadoLeitePage/:id',
+    element: <GadoLeitePage />,
+  },
+  {
+    path: '/PredioPage/:id',
+    element: <PredioPage />,
+  },
+  {
+    path: '/DetalhesListaPage/',
+    element: <DetalhesListaPage />,
   },
 ]);
 
@@ -31,6 +52,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
+      <Gaveta></Gaveta>
       <Routes>
         {router.routes.map((route, index) => (
           <Route

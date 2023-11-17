@@ -30,7 +30,7 @@ const CaprinoOvinoPage = () => {
       <div>
         <h1>{caprinoOvinoDetails.talhao}</h1>
         <div>
-          <a>funciona por favor</a>
+         
           <strong>Área em Hectares: </strong>
           <span>{caprinoOvinoDetails.area_ha}</span>
           <strong>Espaçamento: </strong>

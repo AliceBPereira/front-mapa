@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../lib/axios";
 import Map from "../Map/map";
-import Search from "./Pesquisa";
-import { Chart } from "react-google-charts";
+
 
 const CafePage = () => {
   const { id } = useParams();
@@ -45,7 +44,7 @@ const CafePage = () => {
       <div>
         <h1>{coffeeDetails.talhao}</h1>
         <div>
-          <a>funciona por favor</a>
+       
           <strong>Área em Hectares: </strong>
           <span>{coffeeDetails.area_ha}</span>
           <strong>Espaçamento: </strong>

@@ -1,3 +1,5 @@
+import Gaveta from "../Sidebar/gaveta";
+
 /* Estilos para o header */
 const headerStyle = {
     backgroundColor: 'green',
@@ -30,10 +32,12 @@ const headerStyle = {
   function Header() {
     return (
       <header style={headerStyle}>
+       
+       
         <nav>
           <ul style={navStyle}>
             <li style={listItemStyle}><a href="/" style={linkStyle}>Página Inicial</a></li>
-            
+            <li style={listItemStyle}><a href="/DetalhesListaPage" style={linkStyle}>Detalhes Lista</a></li>
            
             
           </ul>

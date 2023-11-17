@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
+import { Link } from "react-router-dom";
 
 import { api } from "../../lib/axios";
 
@@ -40,12 +41,27 @@ const LocalMarkers = () => {
     <>
       { predios.map((predio) => {
         return (
-          <Marker icon={Iconlugar}  position={predio.localizacao}>
+          <Marker key={predio.id} icon={Iconlugar}  position={predio.localizacao}>
             <Popup>
               <div style={{
                 display: 'flex',
                 flexDirection: 'column'
               }}>
+                
+                <div>
+                  <Link  to={`/CafePage/${predio.id}`} style={{ textDecoration: "none" }}>
+                    <button
+                      style={{
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                      }}
+                    >
+                      Detalhes 
+                    </button>
+                  </Link>
+                </div>
                 <div>
                   <strong>Predio:</strong>
                   <span>{predio.nome}</span>
