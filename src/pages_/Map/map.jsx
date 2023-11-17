@@ -27,7 +27,7 @@ function Map() {
      
      
       <Gaveta/>
-     <Header></Header>
+  
 
       <MapContainer center={[-21.3504826, -46.5282748]} zoom={16}>
         <TileLayer

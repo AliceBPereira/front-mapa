@@ -33,7 +33,8 @@ const headerStyle = {
         <nav>
           <ul style={navStyle}>
             <li style={listItemStyle}><a href="/" style={linkStyle}>Página Inicial</a></li>
-            <li style={listItemStyle}><a href="/CafePage" style={linkStyle}>Detalhes</a></li>
+            
+           
             
           </ul>
         </nav>

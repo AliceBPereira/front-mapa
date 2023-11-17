@@ -1,42 +1,20 @@
 import React, { useEffect, useState } from "react";
+
 import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
-import Modal from "react-modal";
-import { Bar } from "react-chartjs-2";
 
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
 
-function Search() {
+const Grafico = () => {
+
+
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedCafe, setSelectedCafe] = useState(null);
-  const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
-
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
-
-  let query = useQuery();
 
   const requestCafes = async () => {
     setLoading(true);
     try {
-      const response = await api.get("/cafes", {
-        params: {
-          nome: query.get("nome"),
-        },
-      });
+      const response = await api.get("/cafes");
       setCafes(response.data.cafes);
     } catch (err) {
       console.log(err);
@@ -53,79 +31,31 @@ function Search() {
     return <div>Carregando...</div>;
   }
 
-  const filterCafes = () => {
-    let filteredCafes = cafes;
-    if (search) {
-      filteredCafes = filteredCafes.filter((cafe) =>
-        cafe.talhao.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-    // Filtrar os cafés com base na opção selecionada em 'filtro'
-    if (filtro === "PLANTADOS") {
-      filteredCafes = filteredCafes.filter((cafe) => cafe.status === "PLANTADO");
-    } else if (filtro === "COLHIDOS") {
-      filteredCafes = filteredCafes.filter((cafe) => cafe.status === "COLHIDO");
-    }
-    return filteredCafes;
-  };
+  // Manipular os dados para o formato desejado
+  const chartData = [["Data", "Quantidade Colhida"]];
 
-  const openModal = (cafe) => {
-    setSelectedCafe(cafe);
-    setModalIsOpen(true);
-  };
+  cafes.forEach((cafe) => {
+    if (cafe.status === "COLHIDO" && cafe.talhao) {
+      chartData.push([cafe.talhao.data_plantio, cafe.quantidade_colhida]);
+    }
+  });
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const options = {
+    chart: {
+      title: "Quantidade Colhida de Cafés por Data de Plantio",
+      subtitle: "em unidades",
+    },
   };
 
   return (
-    <div>
-      <h1>Esta é a página de pesquisa</h1>
-      <input
-        type="search"
-        placeholder="Pesquisar por talhão"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <div>
-        <label>
-          Filtrar por status:
-          <select value={filtro} onChange={(e) => setFiltro(e.target.value)}>
-            <option value="PLANTADOS">PLANTADOS</option>
-            <option value="COLHIDOS">COLHIDOS</option>
-          </select>
-        </label>
-      </div>
-      <ul>
-        {filterCafes().map((cafe) => (
-          <li key={cafe.id}>
-            <span onClick={() => openModal(cafe)} style={{ cursor: "pointer" }}>
-              {cafe.talhao}
-            </span>
-          </li>
-        ))}
-      </ul>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={modalStyle}>
-        {selectedCafe && (
-          <div>
-            <strong>Talhão:</strong>
-            <span>{selectedCafe.talhao}</span>
-            <strong>Área em Hectares: </strong>
-            <span>{selectedCafe.area_ha}</span>
-            <strong>Espaçamento: </strong>
-            <span>{selectedCafe.espacament}</span>
-            <strong>Estande: </strong>
-            <span>{selectedCafe.estande}</span>
-            <strong>Numero de Plantas: </strong>
-            <span>{selectedCafe.n_de_plantas}</span>
-            <strong>Ano de Plantio: </strong>
-            <span>{selectedCafe.ano_plantio}</span>
-            <button onClick={closeModal}>Fechar</button>
-          </div>
-        )}
-      </Modal>
-    </div>
+    <Chart
+      chartType="Line"
+      width="100%"
+      height="400px"
+      data={chartData}
+      options={options}
+    />
   );
 }
 
-export default Search;
+export default Grafico;

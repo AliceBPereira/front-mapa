@@ -8,11 +8,7 @@ export const SidebarData = [
     icon: <MapIcon />,
     link: "/",
   },
-  {
-    title: "Graficos",
-    icon: <EqualizerIcon />,
-    link: "/CafePage",
-  },
+
   {
     title: "Tables",
     icon: <TableRowsIcon />,

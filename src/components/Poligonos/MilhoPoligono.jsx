@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
 import { MilhoInfo } from "../Informations/MilhoInfo";
 import { api } from "../../lib/axios";
-
+import { Link } from "react-router-dom";
 
 const purpleOptions = { color: "purple" };
 
@@ -35,12 +35,26 @@ const MilhoPolygons = () => {
     <>
       { milhos.map((milho) => {
         return (
-          <Polygon pathOptions={purpleOptions}  positions={milho.localizacao?.coordenadas}>
+          <Polygon key={milho.id} pathOptions={purpleOptions}  positions={milho.localizacao?.coordenadas}>
             <Popup>
               <div style={{
                 display: 'flex',
                 flexDirection: 'column'
               }}>
+                <div>
+                  <Link  to={`/MilhoPage/${milho.id}`} style={{ textDecoration: "none" }}>
+                    <button
+                      style={{
+                        background: "none",
+                        border: "none",
+                        padding: 0,
+                        cursor: "pointer",
+                      }}
+                    >
+                      Detalhes 
+                    </button>
+                  </Link>
+                </div>
                 <div>
                   <strong>Talhão:</strong>
                   <span>{milho.talhao}</span>

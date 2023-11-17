@@ -36,6 +36,7 @@ const CafePolygons = () => {
       {cafes.map((coffee) => {
         return (
           <Polygon
+          key={coffee.id}
             pathOptions={greenOptions}
             positions={coffee.localizacao?.coordenadas}
           >
@@ -47,7 +48,7 @@ const CafePolygons = () => {
                 }}
               >
                 <div>
-                  <Link to="/CafePage" style={{ textDecoration: "none" }}>
+                  <Link  to={`/CafePage/${coffee.id}`} style={{ textDecoration: "none" }}>
                     <button
                       style={{
                         background: "none",
