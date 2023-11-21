@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
-import Modal from "react-modal";
 import { DataGrid } from '@mui/x-data-grid';
-
+import { Link } from "react-router-dom";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -16,19 +15,8 @@ const columns = [
   { field: 'status', headerName: 'Status', width: 150 }, // Add status column
 ];
 
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
-
-function MilhoList() {
-  const [milhos, setMilhos] = useState([]);
+function CaprinoOvinoList() {
+  const [caprinoOvinos, setCaprinoOvinos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
@@ -39,15 +27,15 @@ function MilhoList() {
 
   let query = useQuery();
 
-  const requestMilhos = async () => {
+  const requestCaprinoOvinos = async () => {
     setLoading(true);
     try {
-      const response = await api.get("/milhos", {
+      const response = await api.get("/caprinoOvinos", {
         params: {
           nome: query.get("nome"),
         },
       });
-      setMilhos(response.data.milhos);
+      setCaprinoOvinos(response.data.caprinoOvinos);
     } catch (err) {
       console.log(err);
     } finally {
@@ -56,7 +44,7 @@ function MilhoList() {
   };
 
   useEffect(() => {
-    requestMilhos();
+    requestCaprinoOvinos();
   }, []);
 
   if (loading) {
@@ -64,18 +52,28 @@ function MilhoList() {
   }
 
   // Filter function
-  const filterMilhosByStatus = (milhos, status) => {
+  const filterCaprinoOvinosByStatus = (caprinoOvinos, status) => {
     if (status === "COLHIDOS") {
-      return milhos.filter((milho) => milho.status === "COLHIDO");
+      return caprinoOvinos.filter((caprinoOvinos) => caprinoOvinos.status === "COLHIDO");
     } else if (status === "PLANTADOS") {
-      return milhos.filter((milho) => milho.status === "PLANTADO");
+      return caprinoOvinos.filter((caprinoOvinos) => caprinoOvinos.status === "PLANTADO");
     } else {
-      return milhos; // Return all cafes if no status is selected
+      return caprinoOvinos; // Return all cafes if no status is selected
     }
   };
 
+  // Filter function for search
+  const filterCaprinoOvinosBySearch = (caprinoOvinos, searchTerm) => {
+    return caprinoOvinos.filter((caprinoOvinos) =>
+    caprinoOvinos.talhao.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
+
   // Update cafes based on filtro
-  const filteredCafes = filterMilhosByStatus(milhos, filtro);
+  const filteredCaprinoOvinos = filterCaprinoOvinosByStatus(caprinoOvinos, filtro);
+
+  // Apply search filter
+  const searchedCafes = filterCaprinoOvinosBySearch(filteredCaprinoOvinos, search);
 
   return (
     <div>
@@ -96,16 +94,35 @@ function MilhoList() {
       />
       
       <DataGrid
-        rows={filteredCafes}
-        columns={columns}
+        rows={searchedCafes}
+        columns={[
+          {
+            field: 'details',
+            headerName: 'Detalhes',
+            width: 100,
+            renderCell: (params) => (
+              <Link to={`/CaprinoOvino/${params.row.id}`} style={{ textDecoration: 'none' }}>
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Detalhes
+                </button>
+              </Link>
+            ),
+          },
+          ...columns,
+        ]}
         pageSize={5}
         checkboxSelection
         disableRowSelectionOnClick
-        
       />
-      
     </div>
   );
 }
 
-export default MilhoList;
+export default CaprinoOvinoList;

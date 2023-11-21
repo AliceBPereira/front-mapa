@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
 import Modal from "react-modal";
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -27,7 +27,7 @@ const modalStyle = {
   },
 };
 
-function CafeList() {
+function Search() {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -108,4 +108,4 @@ function CafeList() {
   );
 }
 
-export default CafeList;
+export default Search;

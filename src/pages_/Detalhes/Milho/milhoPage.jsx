@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
+import Grafico from "./grafico";
 
 
 const MilhoPage = () => {
@@ -26,11 +27,13 @@ const MilhoPage = () => {
 
   return (
     <>
-    
+    <div className="Grafico">
+      <Grafico talhaoId={milhoDetails.talhao} />
+      </div>
       <div>
         <h1>{milhoDetails.talhao}</h1>
         <div>
-          <a>funciona por favor</a>
+         
           <strong>Área em Hectares: </strong>
           <span>{milhoDetails.area_ha}</span>
           <strong>Espaçamento: </strong>

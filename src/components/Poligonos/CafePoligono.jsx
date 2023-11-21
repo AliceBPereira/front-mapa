@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 const greenOptions = { color: "green" };
 
 const CafePolygons = () => {
-  console.log(useState);
-
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -31,57 +29,60 @@ const CafePolygons = () => {
     return <></>;
   }
 
+  // Sort cafes based on the registration date in descending order
+  const sortedCafes = cafes.sort((a, b) => new Date(b.data_cadastro) - new Date(a.data_cadastro));
+
+  const lastTalhao = sortedCafes[0]; // Get the first cafe (last registered)
+
   return (
     <>
-      {cafes.map((coffee) => {
-        return (
-          <Polygon
-          key={coffee.id}
-            pathOptions={greenOptions}
-            positions={coffee.localizacao?.coordenadas}
-          >
-            <Popup>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <div>
-                  <Link  to={`/CafePage/${coffee.id}`} style={{ textDecoration: "none" }}>
-                    <button
-                      style={{
-                        background: "none",
-                        border: "none",
-                        padding: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      Detalhes 
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <strong>Talhão:</strong>
-                  <span>{coffee.talhao}</span>
-                </div>
-                <div>
-                  <strong>Área em Hectares: </strong>
-                  <span>{coffee.area_ha}</span>
-                  <strong>Espaçamento: </strong>
-                  <span>{coffee.espacament}</span>
-                  <strong>Estande: </strong>
-                  <span>{coffee.estande}</span>
-                  <strong>Numero de Plantas: </strong>
-                  <span>{coffee.n_de_plantas}</span>
-                  <strong>Ano de Plantio: </strong>
-                  <span>{coffee.ano_plantio}</span>
-                </div>
+      {lastTalhao && (
+        <Polygon
+          key={lastTalhao.id}
+          pathOptions={greenOptions}
+          positions={lastTalhao.localizacao?.coordenadas}
+        >
+          <Popup>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div>
+                <Link to={`/CafePage/${lastTalhao.id}`} style={{ textDecoration: "none" }}>
+                  <button
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Detalhes
+                  </button>
+                </Link>
               </div>
-            </Popup>
-          </Polygon>
-        );
-      })}
+              <div>
+                <strong>Talhão:</strong>
+                <span>{lastTalhao.talhao}</span>
+              </div>
+              <div>
+                <strong>Área em Hectares: </strong>
+                <span>{lastTalhao.area_ha}</span>
+                <strong>Espaçamento: </strong>
+                <span>{lastTalhao.espacament}</span>
+                <strong>Estande: </strong>
+                <span>{lastTalhao.estande}</span>
+                <strong>Numero de Plantas: </strong>
+                <span>{lastTalhao.n_de_plantas}</span>
+                <strong>Ano de Plantio: </strong>
+                <span>{lastTalhao.ano_plantio}</span>
+              </div>
+            </div>
+          </Popup>
+        </Polygon>
+      )}
     </>
   );
 };

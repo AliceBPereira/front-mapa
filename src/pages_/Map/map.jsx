@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -9,7 +10,6 @@ import "./map.css";
 import LocalMarkers from "../../components/Markers/MarkerPredios";
 import MilhoPolygons from "../../components/Poligonos/MilhoPoligono";
 import CafePolygons from "../../components/Poligonos/CafePoligono";
-
 import GadoLeitePolygons from "../../components/Poligonos/GadoLeitePolygon";
 import CaprinoOvinoPolygon from "../../components/Poligonos/CaprinoOvinoPolygon";
 import GadoCortePolygon from "../../components/Poligonos/GadoCortePolygon";
@@ -18,6 +18,7 @@ import CampusPolygon from "../../components/Poligonos/CampusPolygon";
 const { BaseLayer, Overlay } = LayersControl;
 
 function Map() {
+  
   return (
     <div className="map-container">
       <MapContainer center={[-21.3504826, -46.5282748]} zoom={16}>

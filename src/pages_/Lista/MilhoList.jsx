@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
-import Modal from "react-modal";
+
 import { DataGrid } from '@mui/x-data-grid';
 
 
@@ -16,19 +16,8 @@ const columns = [
   { field: 'status', headerName: 'Status', width: 150 }, // Add status column
 ];
 
-const modalStyle = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-};
-
-function Search() {
-  const [cafes, setCafes] = useState([]);
+function MilhoList() {
+  const [milhos, setMilhos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
@@ -39,15 +28,15 @@ function Search() {
 
   let query = useQuery();
 
-  const requestCafes = async () => {
+  const requestMilhos = async () => {
     setLoading(true);
     try {
-      const response = await api.get("/cafes", {
+      const response = await api.get("/milhos", {
         params: {
           nome: query.get("nome"),
         },
       });
-      setCafes(response.data.cafes);
+      setMilhos(response.data.milhos);
     } catch (err) {
       console.log(err);
     } finally {
@@ -56,7 +45,7 @@ function Search() {
   };
 
   useEffect(() => {
-    requestCafes();
+    requestMilhos();
   }, []);
 
   if (loading) {
@@ -64,22 +53,22 @@ function Search() {
   }
 
   // Filter function
-  const filterCafesByStatus = (cafes, status) => {
+  const filterMilhosByStatus = (milhos, status) => {
     if (status === "COLHIDOS") {
-      return cafes.filter((cafe) => cafe.status === "COLHIDO");
+      return milhos.filter((milho) => milho.status === "COLHIDO");
     } else if (status === "PLANTADOS") {
-      return cafes.filter((cafe) => cafe.status === "PLANTADO");
+      return milhos.filter((milho) => milho.status === "PLANTADO");
     } else {
-      return cafes; // Return all cafes if no status is selected
+      return milhos; // Return all cafes if no status is selected
     }
   };
 
   // Update cafes based on filtro
-  const filteredCafes = filterCafesByStatus(cafes, filtro);
+  const filteredCafes = filterMilhosByStatus(milhos, filtro);
 
   return (
     <div>
-      <h1>Listagem</h1>
+      <h1>Milho</h1>
       <select
         value={filtro}
         onChange={(e) => setFiltro(e.target.value)}
@@ -108,4 +97,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default MilhoList;

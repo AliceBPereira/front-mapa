@@ -1,0 +1,28 @@
+.header {
+    background-color: green;
+    color: black;
+    padding: 6px 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  
+  /* Estilos para a lista de navegação */
+  .nav {
+    display: flex;
+    list-style: none;
+  }
+  
+  /* Estilos para os itens da lista */
+  .listItem {
+    margin: 0 20px;
+  }
+  
+  /* Estilos para links */
+  .link {
+    text-decoration: none;
+    color: black;
+    font-family: Verdana, sans-serif; /* Altere 'Verdana' para a fonte desejada */
+  }
+  

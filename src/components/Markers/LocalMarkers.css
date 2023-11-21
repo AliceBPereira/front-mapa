@@ -1,0 +1,17 @@
+/* LocalMarkers.css */
+.markerPopup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .markerPopupLink {
+    text-decoration: none;
+  }
+  
+  .markerPopupButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  

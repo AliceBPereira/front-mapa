@@ -1,50 +1,39 @@
-import Gaveta from "../Sidebar/gaveta";
+// Header.jsx
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import './styles.css';
 
-/* Estilos para o header */
-const headerStyle = {
-    backgroundColor: 'green',
-    color: 'black',
-    padding: '6px 0',
-    position: 'fixed',
-    top: 0,
-    width: '100%',
-    zIndex: 1000,
-  };
-  
-  /* Estilos para a lista de navegação */
-  const navStyle = {
-    display: 'flex', /* Torna os elementos filhos flexíveis (para alinhar horizontalmente) */
-    listStyle: 'none',
-  };
-  
-  /* Estilos para os itens da lista */
-  const listItemStyle = {
-    margin: '0 20px', /* Define margem igual à esquerda e à direita dos elementos da lista */
-  };
-  
-  /* Estilos para links */
-  const linkStyle = {
-    textDecoration: 'none',
-    color: 'black',
-    fontFamily: 'Verdana, sans-serif', /* Altere 'Verdana' para a fonte desejada */
-  };
-  
-  function Header() {
-    return (
-      <header style={headerStyle}>
-       
-       
-        <nav>
-          <ul style={navStyle}>
-            <li style={listItemStyle}><a href="/" style={linkStyle}>Página Inicial</a></li>
-            <li style={listItemStyle}><a href="/DetalhesListaPage" style={linkStyle}>Detalhes Lista</a></li>
-           
-            
-          </ul>
-        </nav>
-      </header>
-    );
-  }
-  
-  export default Header;
-  
+function Header() {
+  // Estado para controlar a visibilidade do submenu
+  const [showSubMenu, setShowSubMenu] = useState(false);
+
+  return (
+    <header className="header">
+      <nav>
+        <ul className="nav">
+          <li className="listItem">
+            <Link to="/" className="link">Página Inicial</Link>
+          </li>
+          <li
+            className="listItem"
+            onMouseEnter={() => setShowSubMenu(true)}
+            onMouseLeave={() => setShowSubMenu(false)}
+          >
+            <div className="link">Detalhes Lista</div>
+            {/* Submenu que aparece ao passar o mouse sobre "Detalhes Lista" */}
+            {showSubMenu && (
+              <ul className="submenu">
+                <li><Link to="/CafeList">Cafe</Link></li>
+                <li><Link to="/MilhoList">Milho</Link></li>
+              </ul>
+            )}
+          </li>
+          
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+export default Header;
+

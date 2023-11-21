@@ -2,73 +2,83 @@ import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
 import { api } from "../../lib/axios";
 import { Link } from "react-router-dom";
+
 const greenOptions = { color: "green" };
 
 const CaprinoOvinoPolygon = () => {
-  console.log(useState)
-
-  const [caprinoOvinos, setCaprinoOvinos] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [caprinoOvinos, setCaprinoOvinos] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const requestCaprinoOvinos = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const response = await api.get('/caprinoOvinos')
-      setCaprinoOvinos(response.data.caprinoOvinos)
+      const response = await api.get('/caprinoOvinos');
+      setCaprinoOvinos(response.data.caprinoOvinos);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    requestCaprinoOvinos()
-  }, [])
+    requestCaprinoOvinos();
+  }, []);
 
-  if(loading) {
-    return <></>
+  if (loading) {
+    return <></>;
   }
+
+  // Sort caprinoOvinos based on the harvest date in descending order
+  const sortedCaprinoOvinos = caprinoOvinos.sort((a, b) => new Date(b.data_colheita) - new Date(a.data_colheita));
+
+  const lastCaprinoOvino = sortedCaprinoOvinos[0]; // Get the first caprinoOvino (last harvested)
+
   return (
     <>
-      { caprinoOvinos.map((caprinoOvino) => {
-        return (
-          <Polygon key={caprinoOvino.id}pathOptions={greenOptions}  positions={caprinoOvino.localizacao?.coordenadas}>
-            <Popup>
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column'
-              }}>
-                <div>
-                  <Link  to={`/CaprinoOvinoPage/${caprinoOvino.id}`} style={{ textDecoration: "none" }}>
-                    <button
-                      style={{
-                        background: "none",
-                        border: "none",
-                        padding: 0,
-                        cursor: "pointer",
-                      }}
-                    >
-                      Detalhes 
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <strong>Talhão:</strong>
-                  <span>{caprinoOvino.talhao}</span>
-                </div>
-                <div>
-                  <strong>Árae em Hectares: </strong>
-                  <span>{caprinoOvino.area_ha}</span>
-                </div>
-              </div> 
-            </Popup>
-          </Polygon>
-        )
-      }) }    
+      {lastCaprinoOvino && (
+        <Polygon
+          key={lastCaprinoOvino.id}
+          pathOptions={greenOptions}
+          positions={lastCaprinoOvino.localizacao?.coordenadas}
+        >
+          <Popup>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div>
+                <Link to={`/CaprinoOvinoPage/${lastCaprinoOvino.id}`} style={{ textDecoration: "none" }}>
+                  <button
+                    style={{
+                      background: "none",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                    }}
+                  >
+                    Detalhes
+                  </button>
+                </Link>
+              </div>
+              <div>
+                <strong>Talhão:</strong>
+                <span>{lastCaprinoOvino.talhao}</span>
+              </div>
+              <div>
+                <strong>Área em Hectares: </strong>
+                <span>{lastCaprinoOvino.area_ha}</span>
+                <strong>Data de Colheita: </strong>
+                <span>{lastCaprinoOvino.data_colheita}</span>
+              </div>
+            </div>
+          </Popup>
+        </Polygon>
+      )}
     </>
   );
 };
-
 
 export default CaprinoOvinoPolygon;
