@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-import { api } from "../../../lib/axios";
+import { api } from "../../lib/axios";
 
-const Grafico = ({ talhaoId }) => {
+const Grafico = () => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,29 +26,41 @@ const Grafico = ({ talhaoId }) => {
     return <div>Carregando...</div>;
   }
 
-  // Filtrar os talhões COLHIDOS de acordo com o talhão do ID
-  const filteredCafes = cafes.filter(
-    (cafe) => cafe.status === "COLHIDO" && cafe.talhao === talhaoId
-  );
-  
-  // Ordenar os cafés com base no ano de plantio
-  filteredCafes.sort((a, b) => parseInt(a.ano_plantio) - parseInt(b.ano_plantio));
-  
-  // Manipular os dados para o formato desejado
-  const chartData = [["Data", "Quantidade Colhida"]];
-  
+  // Filtrar os talhões COLHIDOS
+  const filteredCafes = cafes.filter((cafe) => cafe.status === "COLHIDO");
+
+  // Organizar os dados por talhão
+  const talhaoData = {};
+
   filteredCafes.forEach((cafe) => {
-    chartData.push([cafe.ano_plantio.toString(), cafe.quantidade_colhida]);
+    if (!talhaoData[cafe.talhao]) {
+      talhaoData[cafe.talhao] = {
+        label: cafe.talhao,
+        data: [["Data", "Quantidade Colhida"]],
+      };
+    }
+
+    talhaoData[cafe.talhao].data.push([
+      cafe.ano_plantio,
+      cafe.quantidade_colhida,
+    ]);
+  });
+
+  // Transformar os dados para o formato desejado
+  const chartData = [["Data", "Quantidade Colhida"]];
+
+  Object.keys(talhaoData).forEach((talhao) => {
+    chartData.push(...talhaoData[talhao].data);
   });
 
   const options = {
     chart: {
-      title: `Quantidade Colhida de Cafés para o Talhão ${talhaoId} por Data de Plantio`,
+      title: `Quantidade Colhida de Cafés por Talhão e Data de Plantio`,
       subtitle: "em unidades",
-      
     },
-    colors: Object.keys(talhaoId).map(() => getRandomColor()),
+    colors: Object.keys(talhaoData).map(() => getRandomColor()), // Gera cores aleatórias para cada talhão
   };
+
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -57,6 +69,7 @@ const Grafico = ({ talhaoId }) => {
     }
     return color;
   }
+
   return (
     <Chart
       chartType="Line"

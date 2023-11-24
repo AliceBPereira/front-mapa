@@ -27,17 +27,17 @@ const CafePage = () => {
   }
 
   return (
-    <div>
-      <div className="flexContainer">
-        <div className="mapContainer">
-          <Map />
-        </div>
+    <div className="flexContainer">
+      <div className="mapContainer">
+        <Map className="map" />
+      </div>
 
+      <div className="infoContainer">
         <div className="graficoContainer">
           <Grafico talhaoId={coffeeDetails.talhao} />
         </div>
 
-        <div>
+        <div className="info">
           <h1>{coffeeDetails.talhao}</h1>
           <div>
             <strong>Área em Hectares: </strong>

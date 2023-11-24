@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../../lib/axios";
 import Grafico from "./grafico";
-
+import Map from "../../Map/map";
+import "./milhoPage.css"
 
 const MilhoPage = () => {
   const { id } = useParams();
@@ -26,29 +27,39 @@ const MilhoPage = () => {
   }
 
   return (
-    <>
-    <div className="Grafico">
-      <Grafico talhaoId={milhoDetails.talhao} />
+    <div className="flexContainer">
+    <div className="mapContainer">
+      <Map className="map" />
+    </div>
+
+    <div className="infoContainer">
+      <div className="graficoContainer">
+        <Grafico talhaoId={milhoDetails.talhao} />
       </div>
-      <div>
+
+      <div className="info">
         <h1>{milhoDetails.talhao}</h1>
         <div>
-         
-          <strong>Área em Hectares: </strong>
-          <span>{milhoDetails.area_ha}</span>
-          <strong>Espaçamento: </strong>
-          <span>{milhoDetails.espacament}</span>
-          <strong>Estande: </strong>
-          <span>{milhoDetails.estande}</span>
-          <strong>Numero de Plantas: </strong>
-          <span>{milhoDetails.n_de_plantas}</span>
-          <strong>Ano de Plantio: </strong>
-          <span>{milhoDetails.ano_plantio}</span>
-        </div>
+                <strong>Área em Hectares: </strong>
+                <span>{milhoDetails.area_ha}</span>
+                <strong>Espaçamento: </strong>
+                <span>{milhoDetails.espacament}</span>
+                <strong>Sistema de plantação: </strong>
+                <span>{milhoDetails.sist_plant}</span>
+                <strong>Sementes: </strong>
+                <span>{milhoDetails.sementes}</span>
+                <strong>Produção tha: </strong>
+                <span>{milhoDetails.prod_tha}</span>
+                <strong>Produção de 2020: </strong>
+                <span>{milhoDetails.prod_2020}</span>
+                <strong>Plantio de 2021: </strong>
+                <span>{milhoDetails.plantio_21}</span>
+                <strong>Plantio de 2020: </strong>
+                <span>{milhoDetails.plantio_20}</span>
+              </div>
       </div>
-   
-      
-    </>
+    </div>
+  </div>
   );
 };
 

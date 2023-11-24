@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './styles.css';
+import Gaveta from '../Sidebar/sidebar';
 
 function Header() {
   // Estado para controlar a visibilidade do submenu
@@ -10,7 +11,10 @@ function Header() {
   return (
     <header className="header">
       <nav>
+        
+        
         <ul className="nav">
+        
           <li className="listItem">
             <Link to="/" className="link">Página Inicial</Link>
           </li>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
-
+import "./lista.css"
 import { DataGrid } from '@mui/x-data-grid';
 
-
+import { Link } from "react-router-dom";
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   { field: 'talhao', headerName: 'Talhão', width: 150 },
@@ -62,12 +62,16 @@ function MilhoList() {
       return milhos; // Return all cafes if no status is selected
     }
   };
-
+  const filterMilhosBySearch = (milhos, searchTerm) => {
+    return milhos.filter((milho) =>
+      milho.talhao.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  };
   // Update cafes based on filtro
-  const filteredCafes = filterMilhosByStatus(milhos, filtro);
-
+  const filteredMilhos = filterMilhosByStatus(milhos, filtro);
+  const searchedMilhos = filterMilhosBySearch(filteredMilhos, search);
   return (
-    <div>
+    <div className="lista">
       <h1>Milho</h1>
       <select
         value={filtro}
@@ -85,12 +89,32 @@ function MilhoList() {
       />
       
       <DataGrid
-        rows={filteredCafes}
-        columns={columns}
+        rows={searchedMilhos}
+        columns={[
+          {
+            field: 'details',
+            headerName: 'Detalhes',
+            width: 100,
+            renderCell: (params) => (
+              <Link to={`/MilhoPage/${params.row.id}`} style={{ textDecoration: 'none' }}>
+                <button
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                  }}
+                >
+                  Detalhes
+                </button>
+              </Link>
+            ),
+          },
+          ...columns,
+        ]}
         pageSize={5}
         checkboxSelection
         disableRowSelectionOnClick
-        
       />
       
     </div>

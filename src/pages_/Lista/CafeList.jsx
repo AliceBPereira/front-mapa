@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
-
+import "./lista.css"
+import Grafico from "./grraficoCafe";
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   { field: 'talhao', headerName: 'Talhão', width: 150 },
@@ -76,8 +77,8 @@ function CafeList() {
   const searchedCafes = filterCafesBySearch(filteredCafes, search);
 
   return (
-    <div>
-      <h1>Listagem</h1>
+    <div className="lista">
+      <h1>Listagem Cafés</h1>
       <select
         value={filtro}
         onChange={(e) => setFiltro(e.target.value)}
@@ -86,12 +87,7 @@ function CafeList() {
         <option value="COLHIDOS">COLHIDOS</option>
         <option value="">Todos</option>
       </select>
-      <input
-        type="search"
-        placeholder="Pesquisar por talhão"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+    
       
       <DataGrid
         rows={searchedCafes}
@@ -121,7 +117,11 @@ function CafeList() {
         checkboxSelection
         disableRowSelectionOnClick
       />
+      <div>
+      <Grafico/>
+      </div>
     </div>
+    
   );
 }
 

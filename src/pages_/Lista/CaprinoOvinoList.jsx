@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { api } from "../../lib/axios";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
-
+import "./lista.css"
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   { field: 'talhao', headerName: 'Talhão', width: 150 },
@@ -76,7 +76,7 @@ function CaprinoOvinoList() {
   const searchedCafes = filterCaprinoOvinosBySearch(filteredCaprinoOvinos, search);
 
   return (
-    <div>
+    <div className="lista">
       <h1>Listagem</h1>
       <select
         value={filtro}

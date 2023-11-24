@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {  BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import Map from './pages_/Map/map';
 import CafePage from './pages_/Detalhes/Cafe/cafePage';
@@ -10,9 +10,11 @@ import GadoCortePage from './pages_/Detalhes/GadoCorte/gadoCortePage';
 import GadoLeitePage from './pages_/Detalhes/GadoLeite/gadoLeitePage';
 import PredioPage from './pages_/Detalhes/Predios/Predio';
 import DetalhesListaPage from './pages_/Lista/DetalhesListaPage';
-import Gaveta from './components/Layout/Sidebar/gaveta';
+import Gaveta from './components/Layout/Sidebar/sidebar';
 import CafeList from './pages_/Lista/CafeList';
 
+
+import MilhoList from './pages_/Lista/MilhoList';
 
 export const router = createBrowserRouter([
   {
@@ -51,22 +53,26 @@ export const router = createBrowserRouter([
     path: '/CafeList/',
     element: <CafeList/>,
   },
+  {
+    path: '/MilhoList/',
+    element: <MilhoList/>,
+  },
 ]);
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <Gaveta></Gaveta>
-      <Routes>
-        {router.routes.map((route, index) => (
-          <Route
-            key={index}
-            path={route.path}
-            element={route.element}
-          />
-        ))}
-      </Routes>
+      <div className="app-container">
+        <Header className="header" />
+        
+        <div className="route-container">
+          <Routes className="route">
+            {router.routes.map((route, index) => (
+              <Route key={index} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

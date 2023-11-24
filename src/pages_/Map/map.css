@@ -6,15 +6,6 @@
   flex: 4;
 }
 
-
-
-.menu-button {
-  position: absolute;
-  z-index: 999;
-  top: 15%;
-  left: 10px;
-}
-
 .map-container aside[data-open=true] {
   transform: translateX(0);
 }
