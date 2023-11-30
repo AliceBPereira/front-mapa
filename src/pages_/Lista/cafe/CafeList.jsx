@@ -31,9 +31,17 @@ const CafeList = () => {
   const plantados = cafes.filter((cafe) => cafe.status === "PLANTADO");
 
   // Adicionar talhões selecionados à lista
-  const handleTalhaoSelecionado = (talhao) => {
-    setTalhoesSelecionados((prevSelecionados) => [...prevSelecionados, talhao]);
-  };
+const handleTalhaoSelecionado = (talhao) => {
+  setTalhoesSelecionados((prevSelecionados) => {
+    if (prevSelecionados.includes(talhao)) {
+      // Se o talhão já estiver selecionado, remova-o da lista
+      return prevSelecionados.filter((t) => t !== talhao);
+    } else {
+      // Se o talhão não estiver selecionado, adicione-o à lista
+      return [...prevSelecionados, talhao];
+    }
+  });
+};
 
   // Filtrar talhões selecionados
   const talhoesFiltrados = cafes.filter((cafe) =>
@@ -44,17 +52,27 @@ const CafeList = () => {
   const dadosPorTalhao = {};
   talhoesFiltrados.forEach((cafe) => {
     if (!dadosPorTalhao[cafe.talhao]) {
-      dadosPorTalhao[cafe.talhao] = [];
+      dadosPorTalhao[cafe.talhao] = { anos: [], quantidades: [] };
     }
-    dadosPorTalhao[cafe.talhao].push([cafe.ano_plantio.toString(), cafe.quantidade_colhida]);
+    dadosPorTalhao[cafe.talhao].anos.push(cafe.ano_plantio.toString());
+    dadosPorTalhao[cafe.talhao].quantidades.push(cafe.quantidade_colhida);
   });
-
+  
   // Manipular os dados para o formato desejado
-  const chartData = [["Data", "Quantidade Colhida"]];
-
+  const chartData = [["Data"]];
   Object.keys(dadosPorTalhao).forEach((talhao) => {
-    chartData.push(...dadosPorTalhao[talhao]);
+    chartData[0].push(talhao);
   });
+  if (dadosPorTalhao[talhoesSelecionados[0]]) {
+    dadosPorTalhao[talhoesSelecionados[0]].anos.forEach((ano, index) => {
+      let row = [ano];
+      Object.keys(dadosPorTalhao).forEach((talhao) => {
+        row.push(dadosPorTalhao[talhao].quantidades[index] || 0);
+      });
+      chartData.push(row);
+    });
+  }
+  
 
   const options = {
     chart: {
@@ -86,7 +104,7 @@ const CafeList = () => {
         <h3>Talhões Plantados</h3>
         <ul>
           {plantados.map((talhao) => (
-            <li key={talhao.talhao}>
+            <li key={`${talhao.id}-${talhao.talhao}`}>
               <label>
                 <input
                   type="checkbox"
