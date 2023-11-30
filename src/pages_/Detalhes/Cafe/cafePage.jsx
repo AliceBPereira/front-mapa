@@ -31,25 +31,50 @@ const CafePage = () => {
       <div className="mapContainer">
         <Map className="map" />
       </div>
+    
+
 
       <div className="infoContainer">
         <div className="graficoContainer">
           <Grafico talhaoId={coffeeDetails.talhao} />
         </div>
-
-        <div className="info">
+       
+        <div
+          className="info"
+          style={{
+            border: "1px solid #ccc",
+            padding: "10px",
+            margin: "10px",
+            borderRadius: "8px",
+          }}
+        >
           <h1>{coffeeDetails.talhao}</h1>
-          <div>
-            <strong>Área em Hectares: </strong>
-            <span>{coffeeDetails.area_ha}</span>
-            <strong>Espaçamento: </strong>
-            <span>{coffeeDetails.espacament}</span>
-            <strong>Estande: </strong>
-            <span>{coffeeDetails.estande}</span>
-            <strong>Numero de Plantas: </strong>
-            <span>{coffeeDetails.n_de_plantas}</span>
-            <strong>Ano de Plantio: </strong>
-            <span>{coffeeDetails.ano_plantio}</span>
+
+          <div style={{ marginTop: "10px" }}>
+            <div>
+              <strong>Área em Hectares: </strong>
+              <span>{coffeeDetails.area_ha}</span>
+            </div>
+
+            <div>
+              <strong>Espaçamento: </strong>
+              <span>{coffeeDetails.espacament}</span>
+            </div>
+
+            <div>
+              <strong>Estande: </strong>
+              <span>{coffeeDetails.estande}</span>
+            </div>
+
+            <div>
+              <strong>Numero de Plantas: </strong>
+              <span>{coffeeDetails.n_de_plantas}</span>
+            </div>
+
+            <div>
+              <strong>Ano de Plantio: </strong>
+              <span>{coffeeDetails.ano_plantio}</span>
+            </div>
           </div>
         </div>
       </div>

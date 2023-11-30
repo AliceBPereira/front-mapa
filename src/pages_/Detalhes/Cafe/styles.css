@@ -33,3 +33,21 @@
   padding: 16px; /* Ajuste conforme necessário */
   box-sizing: border-box;
 }
+.info {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+.info h1 {
+  color: #333;
+}
+
+.info strong {
+  font-weight: bold;
+}
+
+.info span {
+  margin-right: 5px;
+}

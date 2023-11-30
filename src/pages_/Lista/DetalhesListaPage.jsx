@@ -1,5 +1,5 @@
 import React from "react";
-import CafeList from "./CafeList";
+import CafeList from "./cafe/CafeList";
 import MilhoList from "./MilhoList";
 
 

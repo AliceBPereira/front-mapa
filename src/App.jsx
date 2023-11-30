@@ -10,8 +10,8 @@ import GadoCortePage from './pages_/Detalhes/GadoCorte/gadoCortePage';
 import GadoLeitePage from './pages_/Detalhes/GadoLeite/gadoLeitePage';
 import PredioPage from './pages_/Detalhes/Predios/Predio';
 import DetalhesListaPage from './pages_/Lista/DetalhesListaPage';
-import Gaveta from './components/Layout/Sidebar/sidebar';
-import CafeList from './pages_/Lista/CafeList';
+
+import CafeList from './pages_/Lista/cafe/CafeList';
 
 
 import MilhoList from './pages_/Lista/MilhoList';

@@ -1,35 +1,10 @@
+// Inside Grafico.js
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-import { api } from "../../lib/axios";
+import { api } from "../../../lib/axios";
 
-const Grafico = () => {
-  const [cafes, setCafes] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const requestCafes = async () => {
-    setLoading(true);
-    try {
-      const response = await api.get("/cafes");
-      setCafes(response.data.cafes);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    requestCafes();
-  }, []);
-
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
-
-  // Filtrar os talhões COLHIDOS
-  const filteredCafes = cafes.filter((cafe) => cafe.status === "COLHIDO");
-
-  // Organizar os dados por talhão
+const Grafico = ({ filteredCafes }) => {
+  console.log("Filtered Cafes:", filteredCafes);
   const talhaoData = {};
 
   filteredCafes.forEach((cafe) => {
@@ -58,7 +33,7 @@ const Grafico = () => {
       title: `Quantidade Colhida de Cafés por Talhão e Data de Plantio`,
       subtitle: "em unidades",
     },
-    colors: Object.keys(talhaoData).map(() => getRandomColor()), // Gera cores aleatórias para cada talhão
+    colors: Object.keys(talhaoData).map(() => getRandomColor()),
   };
 
   function getRandomColor() {
@@ -69,7 +44,7 @@ const Grafico = () => {
     }
     return color;
   }
-
+  console.log("ChartData:", chartData);
   return (
     <Chart
       chartType="Line"

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './styles.css';
-import Gaveta from '../Sidebar/sidebar';
+
 
 function Header() {
   // Estado para controlar a visibilidade do submenu
