@@ -22,9 +22,30 @@
   /* Estilos para links */
   .link {
     text-decoration: none;
-    color: black;
+    color: rgb(255, 255, 255);
     font-family: Verdana, sans-serif; /* Altere 'Verdana' para a fonte desejada */
   }
 
 
+/* Estilo para o submenu */
+.submenu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+ /* Cor de fundo do submenu */
+  display: none;
+}
+
+
+
+.submenu li a {
+  color: rgb(209, 255, 202); /* Cor do texto em branco */
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listItem:hover .submenu {
+  display: block;
+}
 

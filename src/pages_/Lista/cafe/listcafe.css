@@ -1,0 +1,39 @@
+/* Add these styles to your existing CSS file or create a new one */
+.Grafico {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  
+  .Plantados {
+    flex: 1; /* 25% width */
+    margin-right: 20px; /* Add margin for spacing */
+  }
+  
+  .Lista {
+    flex: 1; /* 100% width on smaller screens, adjust as needed */
+    margin-top: 20px; /* Add margin for spacing */
+  }
+  
+  /* Style the checkboxes and labels for planted areas */
+  .Plantados label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Style the list of planted areas */
+  .Plantados ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .Plantados li {
+    margin-bottom: 10px;
+  }
+  
+  /* Apply a margin to the chart for better spacing */
+  .Grafico .react-google-charts {
+    flex: 3; /* 70% width */
+    height: 400px; /* Adjust the height as needed */
+  }
+  

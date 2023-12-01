@@ -8,7 +8,7 @@ const greenOptions = { color: "green" };
 const CafePolygons = () => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
-
+ 
   const requestCafes = async () => {
     setLoading(true);
     try {
@@ -30,7 +30,8 @@ const CafePolygons = () => {
   }
 
   // Sort cafes based on the registration date in descending order
-  const sortedCafes = cafes.sort((a, b) => new Date(b.data_cadastro) - new Date(a.data_cadastro));
+  const sortedCafes = cafes.sort((a, b) => new Date(b.ano_plantio) - new Date(a.ano_plantio
+    ));
 
   const lastTalhao = sortedCafes[0]; // Get the first cafe (last registered)
 
@@ -41,6 +42,7 @@ const CafePolygons = () => {
           key={lastTalhao.id}
           pathOptions={greenOptions}
           positions={lastTalhao.localizacao?.coordenadas}
+          
         >
           <Popup>
             <div

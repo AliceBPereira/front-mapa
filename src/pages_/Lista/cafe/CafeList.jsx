@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
-
+import ListCafe from "./grraficoCafe";
+import "./listcafe.css"
 const CafeList = () => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -47,16 +48,27 @@ const handleTalhaoSelecionado = (talhao) => {
   const talhoesFiltrados = cafes.filter((cafe) =>
     talhoesSelecionados.includes(cafe.talhao)
   );
+// Agrupar informações por talhão
+const dadosPorTalhao = {};
+talhoesFiltrados.forEach((cafe) => {
+  if (!dadosPorTalhao[cafe.talhao]) {
+    dadosPorTalhao[cafe.talhao] = { anos: [], quantidades: [] };
+  }
+  dadosPorTalhao[cafe.talhao].anos.push(cafe.ano_plantio.toString());
+  dadosPorTalhao[cafe.talhao].quantidades.push(cafe.quantidade_colhida);
+});
 
-  // Agrupar informações por talhão
-  const dadosPorTalhao = {};
-  talhoesFiltrados.forEach((cafe) => {
-    if (!dadosPorTalhao[cafe.talhao]) {
-      dadosPorTalhao[cafe.talhao] = { anos: [], quantidades: [] };
-    }
-    dadosPorTalhao[cafe.talhao].anos.push(cafe.ano_plantio.toString());
-    dadosPorTalhao[cafe.talhao].quantidades.push(cafe.quantidade_colhida);
-  });
+// Ordenar os dados por ano de plantio em ordem crescente
+Object.keys(dadosPorTalhao).forEach((talhao) => {
+  const anos = dadosPorTalhao[talhao].anos;
+  const quantidades = dadosPorTalhao[talhao].quantidades;
+
+  const ordenado = anos.map((ano, index) => ({ano, quantidade: quantidades[index]}))
+    .sort((a, b) => a.ano - b.ano);
+
+  dadosPorTalhao[talhao].anos = ordenado.map(item => item.ano);
+  dadosPorTalhao[talhao].quantidades = ordenado.map(item => item.quantidade);
+});
   
   // Manipular os dados para o formato desejado
   const chartData = [["Data"]];
@@ -72,6 +84,7 @@ const handleTalhaoSelecionado = (talhao) => {
       chartData.push(row);
     });
   }
+  
   
 
   const options = {
@@ -91,16 +104,21 @@ const handleTalhaoSelecionado = (talhao) => {
     return color;
   }
 
+  
   return (
-    <div>
-      <Chart
-        chartType="Line"
-        width="100%"
-        height="400px"
-        data={chartData}
-        options={options}
-      />
-      <div>
+    <div className="Grafico">
+      {chartData[0].length < 2 ? (
+        <div>Por favor, selecione pelo menos um talhão.</div>
+      ) : (
+        <Chart
+          chartType="Line"
+          width="100%"
+          height="400px"
+          data={chartData}
+          options={options}
+        />
+      )}
+      <div className="Plantados">
         <h3>Talhões Plantados</h3>
         <ul>
           {plantados.map((talhao) => (
@@ -116,6 +134,9 @@ const handleTalhaoSelecionado = (talhao) => {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="Lista">
+        <ListCafe/>
       </div>
     </div>
   );
