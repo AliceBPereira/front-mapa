@@ -5,6 +5,7 @@ import { api } from "../../../lib/axios";
 const Grafico = ({ talhaoId }) => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [metricaSelecionada, setMetricaSelecionada] = useState("quantidade_colhida");
 
   const requestCafes = async () => {
     setLoading(true);
@@ -30,25 +31,24 @@ const Grafico = ({ talhaoId }) => {
   const filteredCafes = cafes.filter(
     (cafe) => cafe.status === "COLHIDO" && cafe.talhao === talhaoId
   );
-  
+
   // Ordenar os cafés com base no ano de plantio
   filteredCafes.sort((a, b) => parseInt(a.ano_plantio) - parseInt(b.ano_plantio));
-  
+
   // Manipular os dados para o formato desejado
-  const chartData = [["Data", "Quantidade Colhida"]];
-  
+  const chartData = [["Data", "Métrica Selecionada"]];
   filteredCafes.forEach((cafe) => {
-    chartData.push([cafe.ano_plantio.toString(), cafe.quantidade_colhida]);
+    chartData.push([cafe.ano_plantio.toString(), cafe[metricaSelecionada]]);
   });
 
   const options = {
     chart: {
-      title: `Quantidade Colhida de Cafés para o Talhão ${talhaoId} por Data de Plantio`,
+      title: `Comparação da Métrica "${metricaSelecionada}" para o Talhão ${talhaoId} por Data de Plantio`,
       subtitle: "em unidades",
-      
     },
     colors: Object.keys(talhaoId).map(() => getRandomColor()),
   };
+
   function getRandomColor() {
     const letters = "0123456789ABCDEF";
     let color = "#";
@@ -57,14 +57,29 @@ const Grafico = ({ talhaoId }) => {
     }
     return color;
   }
+
   return (
-    <Chart
-      chartType="Line"
-      width="100%"
-      height="400px"
-      data={chartData}
-      options={options}
-    />
+    <div>
+      <label>
+        Selecione a métrica:
+        <select
+          value={metricaSelecionada}
+          onChange={(e) => setMetricaSelecionada(e.target.value)}
+        >
+          <option value="quantidade_colhida">Quantidade Colhida</option>
+          <option value="n_de_plantas">Número de Plantas</option>
+          {/* Adicione outras opções conforme necessário */}
+        </select>
+      </label>
+
+      <Chart
+        chartType="Line"
+        width="100%"
+        height="400px"
+        data={chartData}
+        options={options}
+      />
+    </div>
   );
 };
 
