@@ -6,7 +6,8 @@ const Grafico = ({ talhaoId }) => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [metricaSelecionada, setMetricaSelecionada] = useState("quantidade_colhida");
-
+  const [chartType, setChartType] = useState("Line"); // Default chart type is Line
+  
   const requestCafes = async () => {
     setLoading(true);
     try {
@@ -58,22 +59,37 @@ const Grafico = ({ talhaoId }) => {
     return color;
   }
 
+  
   return (
     <div>
-      <label>
-        Selecione a métrica:
-        <select
-          value={metricaSelecionada}
-          onChange={(e) => setMetricaSelecionada(e.target.value)}
-        >
-          <option value="quantidade_colhida">Quantidade Colhida</option>
-          <option value="n_de_plantas">Número de Plantas</option>
-          {/* Adicione outras opções conforme necessário */}
-        </select>
-      </label>
+      <div>
+        <label>
+          Selecione a métrica:
+          <select
+            value={metricaSelecionada}
+            onChange={(e) => setMetricaSelecionada(e.target.value)}
+          >
+            <option value="quantidade_colhida">Quantidade Colhida</option>
+            <option value="n_de_plantas">Número de Plantas</option>
+            {/* Adicione outras opções conforme necessário */}
+          </select>
+        </label>
+        <label>
+          Selecione o tipo de gráfico:
+          <select
+            value={chartType}
+            onChange={(e) => setChartType(e.target.value)}
+          >
+            <option value="Line">Line</option>
+            <option value="Pie">Pie</option>
+            <option value="Bar">Bar</option>
+            {/* Add other chart types as needed */}
+          </select>
+        </label>
+      </div>
 
       <Chart
-        chartType="Line"
+        chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
         width="100%"
         height="400px"
         data={chartData}

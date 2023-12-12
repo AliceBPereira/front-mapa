@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 import ListCafe from "./grraficoCafe";
-import "./listcafe.css"
+import "./listcafe.css";
+
 const CafeList = () => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [talhoesSelecionados, setTalhoesSelecionados] = useState([]);
+  const [chartType, setChartType] = useState("Line");
 
   const requestCafes = async () => {
     setLoading(true);
@@ -27,6 +29,9 @@ const CafeList = () => {
   if (loading) {
     return <div>Carregando...</div>;
   }
+  const handleChartTypeChange = (newType) => {
+    setChartType(newType);
+  };
 
   // Filtrar todos os talhões PLANTADOS
   const plantados = cafes.filter((cafe) => cafe.status === "PLANTADO");
@@ -60,8 +65,9 @@ talhoesFiltrados.forEach((cafe) => {
 
 // Ordenar os dados por ano de plantio em ordem crescente
 Object.keys(dadosPorTalhao).forEach((talhao) => {
-  const anos = dadosPorTalhao[talhao].anos;
+ 
   const quantidades = dadosPorTalhao[talhao].quantidades;
+  const anos = dadosPorTalhao[talhao].anos;
 
   const ordenado = anos.map((ano, index) => ({ano, quantidade: quantidades[index]}))
     .sort((a, b) => a.ano - b.ano);
@@ -107,11 +113,40 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
   
   return (
     <div className="Grafico">
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="Line"
+            checked={chartType === "Line"}
+            onChange={() => handleChartTypeChange("Line")}
+          />
+          Line
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Pie"
+            checked={chartType === "Pie"}
+            onChange={() => handleChartTypeChange("Pie")}
+          />
+          Pie
+        </label>
+        <label>
+          <input
+            type="radio"
+            value="Bar"
+            checked={chartType === "Bar"}
+            onChange={() => handleChartTypeChange("Bar")}
+          />
+          Line
+        </label>
+      </div>
       {chartData[0].length < 2 ? (
         <div>Por favor, selecione pelo menos um talhão.</div>
       ) : (
         <Chart
-          chartType="Line"
+        chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
           width="100%"
           height="400px"
           data={chartData}
