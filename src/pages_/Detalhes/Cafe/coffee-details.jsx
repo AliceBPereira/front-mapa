@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../../lib/axios";
-import Map from "../../Map/map";
 import Grafico from "./grafico";
-import "./styles.css";
 
-const CafePage = () => {
+import { DetailsMiniMap } from "../../../components/details-mini-map/details-mini-map";
+
+import styles from './coffee-details.module.scss';
+
+const CoffeeDetails = () => {
   const { id } = useParams();
   const [coffeeDetails, setCoffeeDetails] = useState(null);
 
@@ -27,30 +29,25 @@ const CafePage = () => {
   }
 
   return (
-    <div className="flexContainer">
-      <div className="mapContainer">
-        <Map className="map" />
+    <div className={styles.container}>
+      <div className={styles.mapContainer}>
+        <DetailsMiniMap coordinates={coffeeDetails.localizacao.coordenadas}/>
       </div>
     
 
 
-      <div className="infoContainer">
+      <div className={styles.infoContainer}>
+        <h2>Detalhes do café: {coffeeDetails.talhao}</h2>
         <div className="graficoContainer">
           <Grafico talhaoId={coffeeDetails.talhao} />
         </div>
        
         <div
-          className="info"
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            margin: "10px",
-            borderRadius: "8px",
-          }}
+          className={styles.info}
         >
           <h1>{coffeeDetails.talhao}</h1>
 
-          <div style={{ marginTop: "10px" }}>
+          <div className={styles.infoLabels}>
             <div>
               <strong>Área em Hectares: </strong>
               <span>{coffeeDetails.area_ha}</span>
@@ -82,4 +79,4 @@ const CafePage = () => {
   );
 };
 
-export default CafePage;
+export default CoffeeDetails;

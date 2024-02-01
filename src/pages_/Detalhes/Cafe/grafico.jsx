@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 
+import styles from './grafico.module.scss'
+
 const Grafico = ({ talhaoId }) => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -62,30 +64,35 @@ const Grafico = ({ talhaoId }) => {
   
   return (
     <div>
-      <div>
-        <label>
-          Selecione a métrica:
+      <div className={styles.form}>
+        <div className={styles.select}>
+          <label>
+            Selecione a métrica:
+          </label>
           <select
-            value={metricaSelecionada}
-            onChange={(e) => setMetricaSelecionada(e.target.value)}
-          >
-            <option value="quantidade_colhida">Quantidade Colhida</option>
-            <option value="n_de_plantas">Número de Plantas</option>
-            {/* Adicione outras opções conforme necessário */}
-          </select>
-        </label>
-        <label>
-          Selecione o tipo de gráfico:
+              value={metricaSelecionada}
+              onChange={(e) => setMetricaSelecionada(e.target.value)}
+            >
+              <option value="quantidade_colhida">Quantidade Colhida</option>
+              <option value="n_de_plantas">Número de Plantas</option>
+              {/* Adicione outras opções conforme necessário */}
+            </select>
+        </div>
+        <div className={styles.select}>
+          <label>
+            Selecione o tipo de gráfico:
+          </label>
           <select
-            value={chartType}
-            onChange={(e) => setChartType(e.target.value)}
-          >
-            <option value="Line">Line</option>
-            <option value="Pie">Pie</option>
-            <option value="Bar">Bar</option>
-            {/* Add other chart types as needed */}
-          </select>
-        </label>
+              value={chartType}
+              onChange={(e) => setChartType(e.target.value)}
+            >
+              <option value="Line">Line</option>
+              <option value="Pie">Pie</option>
+              <option value="Bar">Bar</option>
+              {/* Add other chart types as needed */}
+            </select>
+        </div>
+       
       </div>
 
       <Chart

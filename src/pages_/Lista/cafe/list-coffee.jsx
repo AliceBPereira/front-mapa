@@ -6,6 +6,8 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { Link } from "react-router-dom";
 
+import styles from './list-coffee.module.scss'
+
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   { field: 'talhao', headerName: 'Talhão', width: 150 },
@@ -77,51 +79,62 @@ function ListCafe() {
   const searchedCafes = filterCafesBySearch(filteredCafes, search);
 
   return (
-    <div className="lista">
+    <div className={styles.container}>
       <h1>Café</h1>
-      <select
-        value={filtro}
-        onChange={(e) => setFiltro(e.target.value)}
-      >
-        <option value="PLANTADOS">PLANTADOS DE CAFÉ</option>
-        <option value="COLHIDOS">COLHIDOS DE CAFÉ</option>
-        <option value="">Todos</option>
-      </select>
-      <input
-        type="search"
-        placeholder="Pesquisar por talhão"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <div className={styles.form}>
+        
+          <select
+            className={styles.select}
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+          >
+            <option value="PLANTADOS">PLANTADOS</option>
+            <option value="COLHIDOS">COLHIDOS</option>
+            <option value="">Todos</option>
+          </select>
+        
+        <input
+          className={styles.input}
+          type="search"
+          placeholder="Pesquisar por talhão"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+
+      <div className={styles.grid}>
+        <DataGrid
+          rows={searchedCafes}
+          columns={[
+            {
+              field: 'details',
+              headerName: 'Detalhes',
+              width: 100,
+              renderCell: (params) => (
+                <Link to={`/CafePage/${params.row.id}`} style={{ textDecoration: 'none' }}>
+                  <button
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Detalhes
+                  </button>
+                </Link>
+              ),
+            },
+            ...columns,
+          ]}
+          pageSize={5}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
+      </div>
       
-      <DataGrid
-        rows={searchedCafes}
-        columns={[
-          {
-            field: 'details',
-            headerName: 'Detalhes',
-            width: 100,
-            renderCell: (params) => (
-              <Link to={`/CafePage/${params.row.id}`} style={{ textDecoration: 'none' }}>
-                <button
-                  style={{
-                    background: 'none',
-                    border: 'none',
-                    padding: 0,
-                    cursor: 'pointer',
-                  }}
-                >
-                  Detalhes
-                </button>
-              </Link>
-            ),
-          },
-          ...columns,
-        ]}
-        pageSize={5}
-        checkboxSelection
-        disableRowSelectionOnClick
-      />
+      
     </div>
   );
 }

@@ -8,34 +8,33 @@ function Header() {
   // Estado para controlar a visibilidade do submenu
   const [showSubMenu, setShowSubMenu] = useState(false);
 
+
   return (
     <header className="header">
       <nav>
-        
-        
         <ul className="nav">
-        
+
           <li className="listItem">
             <Link to="/" className="link">Página Inicial</Link>
           </li>
           <li
             className="listItem"
-            onMouseEnter={() => setShowSubMenu(true)}
-            onMouseLeave={() => setShowSubMenu(false)}
+            onClick={() => setShowSubMenu(state => !state)}
           >
-            <div className="link">Detalhes Lista</div>
-            {/* Submenu que aparece ao passar o mouse sobre "Detalhes Lista" */}
-            {showSubMenu && (
-              <ul className="submenu">
-                <li><Link to="/CafeList">Cafe</Link></li>
+            <div className="link">
+              Métricas
+
+              <ul className={`submenu ${showSubMenu && 'listItem-active'}`}>
+                <li><Link to="/CafeList">Café</Link></li>
                 <li><Link to="/MilhoList">Milho</Link></li>
               </ul>
-            )}
+
+            </div>
+            {/* Submenu que aparece ao passar o mouse sobre "Detalhes Lista" */}
           </li>
-          
         </ul>
       </nav>
-    </header>
+    </header >
   );
 }
 

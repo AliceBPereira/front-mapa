@@ -3,6 +3,8 @@ import { Polygon, Popup } from "react-leaflet";
 import { MilhoInfo } from "../Informations/MilhoInfo";
 import { api } from "../../lib/axios";
 import { Link } from "react-router-dom";
+import { DetailsButton } from "../details-button/details-button";
+import { PopUpMark } from "../popup-mark/popup-mark";
 
 const purpleOptions = { color: "purple" };
 
@@ -44,28 +46,9 @@ const MilhoPolygons = () => {
           positions={lastTalhao.localizacao?.coordenadas}
         >
           <Popup>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <PopUpMark>
               <div>
-                <Link
-                  to={`/MilhoPage/${lastTalhao.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <button
-                    style={{
-                      background: "none",
-                      border: "none",
-                      padding: 0,
-                      cursor: "pointer",
-                    }}
-                  >
-                    Detalhes
-                  </button>
-                </Link>
+                <DetailsButton url={`/MilhoPage/${lastTalhao.id}`} />
               </div>
               <div>
                 <strong>Talhão:</strong>
@@ -89,7 +72,7 @@ const MilhoPolygons = () => {
                 <strong>Plantio de 2020: </strong>
                 <span>{lastTalhao.plantio_20}</span>
               </div>
-            </div>
+            </PopUpMark>
           </Popup>
         </Polygon>
       )}

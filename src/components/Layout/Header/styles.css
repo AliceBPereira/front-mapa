@@ -1,51 +1,65 @@
 .header {
-    background-color: green;
-    color: black;
-    padding: 6px 0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-  
-  /* Estilos para a lista de navegação */
-  .nav {
-    display: flex;
-    list-style: none;
-  }
-  
-  /* Estilos para os itens da lista */
-  .listItem {
-    margin: 0 20px;
-  }
-  
-  /* Estilos para links */
-  .link {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-family: Verdana, sans-serif; /* Altere 'Verdana' para a fonte desejada */
-  }
+  display: flex;
+  align-items: center;
+  background-color: green;
+  color: black;
+  width: 100%;
+  height: 6vh;
+  z-index: 1000;
+}
 
+/* Estilos para a lista de navegação */
+.nav {
+  display: flex;
+  list-style: none;
+}
+
+/* Estilos para os itens da lista */
+.listItem {
+  margin: 0 20px;
+}
+
+.listItem:hover {
+  cursor: pointer;
+}
+
+/* Estilos para links */
+.link {
+  position: relative;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-family: Verdana, sans-serif; /* Altere 'Verdana' para a fonte desejada */
+}
 
 /* Estilo para o submenu */
 .submenu {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: #eee;
+  border-radius: 5px;
+  width: 100px;
+  padding: 10px 20px;
+  position: absolute;
+  top: 30px;
+  right: 50%;
+  transform: translateX(50%);
   list-style-type: none;
-  padding: 0;
-  margin: 0;
-
- /* Cor de fundo do submenu */
   display: none;
 }
 
-
-
 .submenu li a {
-  color: rgb(209, 255, 202); /* Cor do texto em branco */
-  padding: 10px;
+  color: green; /* Cor do texto em branco */
   text-decoration: none;
 }
 
-.listItem:hover .submenu {
-  display: block;
+.submenu li a:hover {
+  text-decoration: underline;
+  transition: all 0.2s;
+  filter: brightness(0.95);
 }
 
+.listItem-active {
+  display: flex;
+}

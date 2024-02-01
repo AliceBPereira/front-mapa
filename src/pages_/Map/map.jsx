@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   MapContainer,
   TileLayer,
@@ -9,7 +9,7 @@ import "./map.css";
 
 import LocalMarkers from "../../components/Markers/MarkerPredios";
 import MilhoPolygons from "../../components/Poligonos/MilhoPoligono";
-import CafePolygons from "../../components/Poligonos/CafePoligono";
+import CafePolygons from "../../components/Poligonos/cafe/CafePoligono";
 import GadoLeitePolygons from "../../components/Poligonos/GadoLeitePolygon";
 import CaprinoOvinoPolygon from "../../components/Poligonos/CaprinoOvinoPolygon";
 import GadoCortePolygon from "../../components/Poligonos/GadoCortePolygon";
@@ -18,7 +18,7 @@ import CampusPolygon from "../../components/Poligonos/CampusPolygon";
 const { BaseLayer, Overlay } = LayersControl;
 
 function Map() {
-  
+
   return (
     <div className="map-container">
       <MapContainer center={[-21.3504826, -46.5282748]} zoom={16}>
@@ -27,7 +27,7 @@ function Map() {
           url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
         />
         <div className="leaflet-control-layers leaflet-control-layers-expanded">
-          <LayersControl position="topright">
+          <LayersControl position="topright" >
             <BaseLayer checked name="Mapa de Rua">
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             </BaseLayer>
@@ -37,37 +37,37 @@ function Map() {
                 subdomains={["mt0", "mt1", "mt2", "mt3"]}
               />
             </BaseLayer>
-            <Overlay name="Campus">
+            <Overlay name="Campus" checked>
               <LayerGroup>
                 <CampusPolygon />
               </LayerGroup>
             </Overlay>
-            <Overlay name="Café">
+            <Overlay name="Café" checked>
               <LayerGroup>
                 <CafePolygons />
               </LayerGroup>
             </Overlay>
-            <Overlay name="Gado de Leite">
+            <Overlay name="Gado de Leite" checked>
               <LayerGroup>
                 <GadoLeitePolygons />
               </LayerGroup>
             </Overlay>
-            <Overlay name="Gado de Corte">
+            <Overlay name="Gado de Corte" checked>
               <LayerGroup>
                 <GadoCortePolygon />
               </LayerGroup>
             </Overlay>
-            <Overlay name="Caprino e Ovino">
+            <Overlay name="Caprino e Ovino" checked>
               <LayerGroup>
                 <CaprinoOvinoPolygon />
               </LayerGroup>
             </Overlay>
-            <Overlay name="Prédios">
+            <Overlay name="Prédios" checked>
               <LayerGroup>
                 <LocalMarkers />
               </LayerGroup>
             </Overlay>
-            <Overlay name="Milho">
+            <Overlay name="Milho" checked>
               <LayerGroup>
                 <MilhoPolygons />
               </LayerGroup>

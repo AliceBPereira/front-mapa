@@ -1,0 +1,62 @@
+.container {
+    display: flex;
+    width: 100vw;
+  
+    h2 {
+      margin: 0;
+    }
+  }
+  
+  .mapContainer {
+    display: flex;
+    min-width: 40%;
+    padding: 5px 5px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  
+  }
+  
+  
+  .infoContainer {
+    display: flex;
+    padding: 10px 30px;
+    gap: 20px;
+    flex: 1;
+    flex-direction: column;
+  
+  }
+  
+  .graficoContainer {
+    height: 40%; /* Ajuste conforme necessário */
+    margin: 20px;
+    
+  }
+  
+  .info {
+    box-sizing: border-box;
+  }
+  
+  .info {
+    border-top: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+  
+    h1 {
+      color: #333;
+    }
+  
+    strong {
+      font-weight: bold;
+    }
+  
+    span {
+      margin-right: 5px;
+    }
+  }
+  
+  .infoLabels {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  

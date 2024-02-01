@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
-import ListCafe from "./grraficoCafe";
-import "./listcafe.css";
+import ListCafe from "./list-coffee";
+import styles from './coffee-metrics.module.scss'
 
 const CafeList = () => {
   const [cafes, setCafes] = useState([]);
@@ -112,8 +112,9 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
 
   
   return (
-    <div className="Grafico">
+    <div className={styles.container}>
       <div>
+        <h3>Selecione um tipo de gráfico</h3>
         <label>
           <input
             type="radio"
@@ -121,7 +122,7 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
             checked={chartType === "Line"}
             onChange={() => handleChartTypeChange("Line")}
           />
-          Line
+          Linha
         </label>
         <label>
           <input
@@ -130,7 +131,7 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
             checked={chartType === "Pie"}
             onChange={() => handleChartTypeChange("Pie")}
           />
-          Pie
+          Pizza
         </label>
         <label>
           <input
@@ -139,22 +140,25 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
             checked={chartType === "Bar"}
             onChange={() => handleChartTypeChange("Bar")}
           />
-          Line
+          Barras
         </label>
       </div>
-      {chartData[0].length < 2 ? (
-        <div>Por favor, selecione pelo menos um talhão.</div>
-      ) : (
-        <Chart
-        chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
-          width="100%"
-          height="400px"
-          data={chartData}
-          options={options}
-        />
-      )}
-      <div className="Plantados">
-        <h3>Talhões Plantados</h3>
+      <div className={styles.chart}>
+        {chartData[0].length < 2 ? (
+          <div className={styles.noData}>Sem dados.</div>
+        ) : (
+          <Chart
+            chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
+            width="100%"
+            height="100%"
+            data={chartData}
+            options={options}
+          />
+        )}
+      </div>
+      
+      <div className={styles.selectCoffee}>
+        <h3>Selecione um ou mais talhões plantados:</h3>
         <ul>
           {plantados.map((talhao) => (
             <li key={`${talhao.id}-${talhao.talhao}`}>

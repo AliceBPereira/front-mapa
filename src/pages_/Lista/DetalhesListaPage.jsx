@@ -1,6 +1,6 @@
 import React from "react";
-import CafeList from "./cafe/CafeList";
-import MilhoList from "./MilhoList";
+import CafeList from "./cafe/coffee-metrics";
+import MilhoList from "./milho/milho-metrics";
 
 
 function DetalhesListaPage() {
