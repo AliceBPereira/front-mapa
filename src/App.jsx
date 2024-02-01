@@ -12,6 +12,7 @@ import DetalhesListaPage from './pages_/Lista/DetalhesListaPage';
 
 import CafeList from './pages_/Lista/cafe/coffee-metrics';
 import MilhoList from './pages_/Lista/milho/milho-metrics';
+import CaprinoOvinoList from './pages_/Lista/milho/milho-metrics'
 
 import styles from './app.module.scss'
 import MilhoDetails from './pages_/Detalhes/Milho/corn-details';
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
   {
     path: '/MilhoList/',
     element: <MilhoList />,
+  },
+  {
+    path: '/CaprinoOvinoList/',
+    element: <CaprinoOvinoList />,
   },
 ]);
 

@@ -13,4 +13,8 @@ export const SidebarData = [
     title: "Milho",
     link: "/MilhoList",
   },
+  {
+    title: "Caprino Ovino",
+    link: "/CaprinoOvinoList",
+  },
 ];
