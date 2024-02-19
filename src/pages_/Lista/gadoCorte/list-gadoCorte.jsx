@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { Link } from "react-router-dom";
 
-import styles from './list-coffee.module.scss'
+import styles from './list-gadoCorte.module.scss'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -19,8 +19,8 @@ const columns = [
   { field: 'status', headerName: 'Status', width: 150 }, // Adicione a coluna de status
 ];
 
-function ListCafe() {
-  const [cafes, setCafes] = useState([]);
+function ListGadoCorte() { // Alterado o nome da função
+  const [gadosCortes, setGadosCortes] = useState([]); // Alterado o nome do estado
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
@@ -31,15 +31,15 @@ function ListCafe() {
 
   let query = useQuery();
 
-  const requestCafes = async () => {
+  const requestGadosCortes = async () => { // Alterado o nome da função
     setLoading(true);
     try {
-      const response = await api.get("/cafes", {
+      const response = await api.get("/gadosCortes", {
         params: {
           nome: query.get("nome"),
         },
       });
-      setCafes(response.data.cafes);
+      setGadosCortes(response.data.gadosCortes); // Alterado o nome da variável
     } catch (err) {
       console.log(err);
     } finally {
@@ -48,7 +48,7 @@ function ListCafe() {
   };
 
   useEffect(() => {
-    requestCafes();
+    requestGadosCortes(); // Alterado o nome da função
   }, []);
 
   if (loading) {
@@ -56,31 +56,30 @@ function ListCafe() {
   }
 
   // Função de filtro
-  const filterCafesByStatus = (cafes, status) => {
+  const filterGadosCortesByStatus = (gadosCortes, status) => { // Alterado o nome da função
     if (status === "COLHIDOS") {
-      return cafes.filter((cafe) => cafe.status === "COLHIDO");
+      return gadosCortes.filter((gadoCorte) => gadoCorte.status === "COLHIDO"); // Alterado o nome da variável
     } else if (status === "PLANTADOS") {
-      return cafes.filter((cafe) => cafe.status === "PLANTADO");
+      return gadosCortes.filter((gadoCorte) => gadoCorte.status === "PLANTADO"); // Alterado o nome da variável
     } else {
-      return cafes; // Retorna todos os cafés se nenhum status for selecionado
+      return gadosCortes; // Retorna todos os cafés se nenhum status for selecionado
     }
   };
-  
 
-  const filterCafesBySearch = (cafes, searchTerm) => {
-    return cafes.filter((cafe) =>
-      cafe.talhao.toLowerCase().includes(searchTerm.toLowerCase())
+  const filterGadosCortesBySearch = (gadosCortes, searchTerm) => { // Alterado o nome da função
+    return gadosCortes.filter((gadoCorte) =>
+      gadoCorte.talhao.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
   // Atualiza cafés com base no filtro
-  const filteredCafes = filterCafesByStatus(cafes, filtro);
+  const filteredGadosCortes = filterGadosCortesByStatus(gadosCortes, filtro); // Alterado o nome da variável
   
-  const searchedCafes = filterCafesBySearch(filteredCafes, search);
+  const searchedGadosCortes = filterGadosCortesBySearch(filteredGadosCortes, search); // Alterado o nome da variável
 
   return (
     <div className={styles.container}>
-      <h1>Café</h1>
+      <h1>Gado de Corte</h1> {/* Alterado o título */}
       <div className={styles.form}>
         
           <select
@@ -105,14 +104,14 @@ function ListCafe() {
 
       <div className={styles.grid}>
         <DataGrid
-          rows={searchedCafes}
+          rows={searchedGadosCortes} // Alterado o nome da variável
           columns={[
             {
               field: 'details',
               headerName: 'Detalhes',
               width: 100,
               renderCell: (params) => (
-                <Link to={`/CafePage/${params.row.id}`} style={{ textDecoration: 'none' }}>
+                <Link to={`/GadoCortePage/${params.row.id}`} style={{ textDecoration: 'none' }}>
                   <button
                     style={{
                       background: 'none',
@@ -139,4 +138,4 @@ function ListCafe() {
   );
 }
 
-export default ListCafe;
+export default ListGadoCorte; // Alterado o nome do componente

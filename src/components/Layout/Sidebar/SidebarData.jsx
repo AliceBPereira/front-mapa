@@ -15,6 +15,10 @@ export const SidebarData = [
   },
   {
     title: "Caprino Ovino",
-    link: "/",
+    link: "/CaprinoOvinoList",
+  },
+  {
+    title: "Gado Corte",
+    link: "/GadoCorteList",
   },
 ];

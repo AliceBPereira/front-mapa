@@ -27,7 +27,8 @@ function Header() {
               <ul className={`submenu ${showSubMenu && 'listItem-active'}`}>
                 <li><Link to="/CafeList">Café</Link></li>
                 <li><Link to="/MilhoList">Milho</Link></li>
-                <li><Link to="CaprinoOvinoList">Caprino Ovino</Link></li>
+                <li><Link to="/CaprinoOvinoList">Caprino Ovino</Link></li>
+                <li><Link to="/GadoCorteList">Gado Corte</Link></li>
               </ul>
 
             </div>

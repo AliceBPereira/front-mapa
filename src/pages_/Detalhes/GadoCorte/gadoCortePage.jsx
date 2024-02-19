@@ -10,7 +10,7 @@ const GadoCortePage = () => {
   useEffect(() => {
     const fetchGadoCorteDetails = async () => {
       try {
-        const response = await api.get(`/gadosCorte/${id}`);
+        const response = await api.get(`/gadosCortes/${id}`);
         setGadoCorteDetails(response.data.gadoCorte);
       } catch (err) {
         console.log(err);

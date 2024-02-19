@@ -5,16 +5,16 @@ import ListCaprinoOvino from "./list-caprinoOvino";  // Importando o componente 
 import styles from './caprinoOvino-metrics.module.scss'  // Alterando o nome do arquivo de estilo
 
 const CaprinoOvinoList = () => {  // Alterando o nome da função para CaprinoOvinoList
-  const [caprinosOvinos, setCaprinosOvinos] = useState([]);  // Alterando o nome do estado para caprinosOvinos
+  const [caprinoOvinos, setCaprinoOvinos] = useState([]);  // Alterando o nome do estado para caprinosOvinos
   const [loading, setLoading] = useState(false);
   const [talhoesSelecionados, setTalhoesSelecionados] = useState([]);
   const [chartType, setChartType] = useState("Line");
 
-  const requestCaprinosOvinos = async () => {  // Alterando o nome da função para requestCaprinosOvinos
+  const requestCaprinoOvinos = async () => {  // Alterando o nome da função para requestCaprinosOvinos
     setLoading(true);
     try {
-      const response = await api.get("/caprinosOvinos");  // Alterando a rota para "/caprinosOvinos"
-      setCaprinosOvinos(response.data.caprinosOvinos);  // Alterando o nome do estado para caprinosOvinos
+      const response = await api.get("/caprinoOvinos");  // Alterando a rota para "/caprinosOvinos"
+      setCaprinoOvinos(response.data.caprinoOvinos);  // Alterando o nome do estado para caprinosOvinos
     } catch (err) {
       console.log(err);
     } finally {
@@ -23,7 +23,7 @@ const CaprinoOvinoList = () => {  // Alterando o nome da função para CaprinoOv
   };
 
   useEffect(() => {
-    requestCaprinosOvinos();  // Alterando a chamada da função para requestCaprinosOvinos
+    requestCaprinoOvinos();  // Alterando a chamada da função para requestCaprinosOvinos
   }, []);
 
   if (loading) {
@@ -35,7 +35,7 @@ const CaprinoOvinoList = () => {  // Alterando o nome da função para CaprinoOv
   };
 
   // Filtrar todos os talhões PLANTADOS
-  const plantados = caprinosOvinos.filter((caprinoOvino) => caprinoOvino.status === "PLANTADO");
+  const plantados = caprinoOvinos.filter((caprinoOvino) => caprinoOvino.status === "PLANTADO");
 
   // Adicionar talhões selecionados à lista
   const handleTalhaoSelecionado = (talhao) => {
@@ -51,7 +51,7 @@ const CaprinoOvinoList = () => {  // Alterando o nome da função para CaprinoOv
   };
 
   // Filtrar talhões selecionados
-  const talhoesFiltrados = caprinosOvinos.filter((caprinoOvino) =>
+  const talhoesFiltrados = caprinoOvinos.filter((caprinoOvino) =>
     talhoesSelecionados.includes(caprinoOvino.talhao)
   );
 
@@ -94,7 +94,7 @@ const CaprinoOvinoList = () => {  // Alterando o nome da função para CaprinoOv
 
   const options = {
     chart: {
-      title: `Quantidade Colhida de CaprinosOvinos para os Talhões por Data de Plantio`,
+      title: `Quantidade Colhida de CaprinoOvinos para os Talhões por Data de Plantio`,
       subtitle: "em unidades",
     },
     colors: talhoesSelecionados.map(() => getRandomColor()),

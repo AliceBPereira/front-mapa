@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 const orangeOptions = { color: "orange" };
 
 const GadoCortePolygon = () => {
-  const [gadosCorte, setGadosCorte] = useState([]);
+  const [gadosCortes, setGadosCortes] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const requestGadosCorte = async () => {
+  const requestGadosCortes = async () => {
     setLoading(true);
     try {
-      const response = await api.get("/gadosCorte");
-      setGadosCorte(response.data.gadosCorte);
+      const response = await api.get("/gadosCortes");
+      setGadosCortes(response.data.gadosCortes);
     } catch (err) {
       console.log(err);
     } finally {
@@ -22,17 +22,17 @@ const GadoCortePolygon = () => {
   };
 
   useEffect(() => {
-    requestGadosCorte();
+    requestGadosCortes();
   }, []);
 
   if (loading) {
     return <></>;
   }
 
-  // Sort gadosCorte based on the harvest date in descending order
-  const sortedGadosCorte = gadosCorte.sort((a, b) => new Date(b.data_colheita) - new Date(a.data_colheita));
+  // Sort gadosCortes based on the harvest date in descending order
+  const sortedGadosCortes = gadosCortes.sort((a, b) => new Date(b.data_colheita) - new Date(a.data_colheita));
 
-  const lastGadoCorte = sortedGadosCorte[0]; // Get the first gadoCorte (last harvested)
+  const lastGadoCorte = sortedGadosCortes[0]; // Get the first gadoCorte (last harvested)
 
   return (
     <>

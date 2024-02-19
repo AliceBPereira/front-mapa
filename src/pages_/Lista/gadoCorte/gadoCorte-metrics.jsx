@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
-import ListCafe from "./list-coffee";
-import styles from './coffee-metrics.module.scss'
+import ListGadoCorte from "./list-gadoCorte"; // Alterado o nome do componente
+import styles from './gadoCorte-metrics.module.scss'
 
-const CafeList = () => {
-  const [cafes, setCafes] = useState([]);
+const GadoCorteList = () => { // Alterado o nome do componente
+  const [gadosCortes, setGadosCortes] = useState([]); // Alterado o nome do estado
   const [loading, setLoading] = useState(false);
   const [talhoesSelecionados, setTalhoesSelecionados] = useState([]);
   const [chartType, setChartType] = useState("Line");
 
-  const requestCafes = async () => {
+  const requestGadosCortes = async () => { // Alterado o nome da função
     setLoading(true);
     try {
-      const response = await api.get("/cafes");
-      setCafes(response.data.cafes);
+      const response = await api.get("/gadosCortes");
+      setGadosCortes(response.data.gadosCortes); // Alterado o nome da variável
     } catch (err) {
       console.log(err);
     } finally {
@@ -23,7 +23,7 @@ const CafeList = () => {
   };
 
   useEffect(() => {
-    requestCafes();
+    requestGadosCortes(); // Alterado o nome da função
   }, []);
 
   if (loading) {
@@ -34,48 +34,48 @@ const CafeList = () => {
   };
 
   // Filtrar todos os talhões PLANTADOS
-  const plantados = cafes.filter((cafe) => cafe.status === "PLANTADO");
+  const plantados = gadosCortes.filter((gadoCorte) => gadoCorte.status === "PLANTADO"); // Alterado o nome da variável
 
   // Adicionar talhões selecionados à lista
-const handleTalhaoSelecionado = (talhao) => {
-  setTalhoesSelecionados((prevSelecionados) => {
-    if (prevSelecionados.includes(talhao)) {
-      // Se o talhão já estiver selecionado, remova-o da lista
-      return prevSelecionados.filter((t) => t !== talhao);
-    } else {
-      // Se o talhão não estiver selecionado, adicione-o à lista
-      return [...prevSelecionados, talhao];
-    }
-  });
-};
+  const handleTalhaoSelecionado = (talhao) => {
+    setTalhoesSelecionados((prevSelecionados) => {
+      if (prevSelecionados.includes(talhao)) {
+        // Se o talhão já estiver selecionado, remova-o da lista
+        return prevSelecionados.filter((t) => t !== talhao);
+      } else {
+        // Se o talhão não estiver selecionado, adicione-o à lista
+        return [...prevSelecionados, talhao];
+      }
+    });
+  };
 
   // Filtrar talhões selecionados
-  const talhoesFiltrados = cafes.filter((cafe) =>
-    talhoesSelecionados.includes(cafe.talhao)
+  const talhoesFiltrados = gadosCortes.filter((gadoCorte) =>
+    talhoesSelecionados.includes(gadoCorte.talhao)
   );
-// Agrupar informações por talhão
-const dadosPorTalhao = {};
-talhoesFiltrados.forEach((cafe) => {
-  if (!dadosPorTalhao[cafe.talhao]) {
-    dadosPorTalhao[cafe.talhao] = { anos: [], quantidades: [] };
-  }
-  dadosPorTalhao[cafe.talhao].anos.push(cafe.ano_plantio.toString());
-  dadosPorTalhao[cafe.talhao].quantidades.push(cafe.quantidade_colhida);
-});
 
-// Ordenar os dados por ano de plantio em ordem crescente
-Object.keys(dadosPorTalhao).forEach((talhao) => {
- 
-  const quantidades = dadosPorTalhao[talhao].quantidades;
-  const anos = dadosPorTalhao[talhao].anos;
+  // Agrupar informações por talhão
+  const dadosPorTalhao = {};
+  talhoesFiltrados.forEach((gadoCorte) => {
+    if (!dadosPorTalhao[gadoCorte.talhao]) {
+      dadosPorTalhao[gadoCorte.talhao] = { anos: [], quantidades: [] };
+    }
+    dadosPorTalhao[gadoCorte.talhao].anos.push(gadoCorte.ano_plantio.toString());
+    dadosPorTalhao[gadoCorte.talhao].quantidades.push(gadoCorte.quantidade_colhida);
+  });
 
-  const ordenado = anos.map((ano, index) => ({ano, quantidade: quantidades[index]}))
-    .sort((a, b) => a.ano - b.ano);
+  // Ordenar os dados por ano de plantio em ordem crescente
+  Object.keys(dadosPorTalhao).forEach((talhao) => {
+    const quantidades = dadosPorTalhao[talhao].quantidades;
+    const anos = dadosPorTalhao[talhao].anos;
 
-  dadosPorTalhao[talhao].anos = ordenado.map(item => item.ano);
-  dadosPorTalhao[talhao].quantidades = ordenado.map(item => item.quantidade);
-});
-  
+    const ordenado = anos.map((ano, index) => ({ ano, quantidade: quantidades[index] }))
+      .sort((a, b) => a.ano - b.ano);
+
+    dadosPorTalhao[talhao].anos = ordenado.map(item => item.ano);
+    dadosPorTalhao[talhao].quantidades = ordenado.map(item => item.quantidade);
+  });
+
   // Manipular os dados para o formato desejado
   const chartData = [["Data"]];
   Object.keys(dadosPorTalhao).forEach((talhao) => {
@@ -90,8 +90,6 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
       chartData.push(row);
     });
   }
-  
-  
 
   const options = {
     chart: {
@@ -110,7 +108,6 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
     return color;
   }
 
-  
   return (
     <div className={styles.container}>
       <div>
@@ -156,29 +153,29 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
           />
         )}
       </div>
-      
+
       <div className={styles.selectCoffee}>
         <h3>Selecione um ou mais talhões plantados:</h3>
         <ul>
-          {plantados.map((talhao) => (
-            <li key={`${talhao.id}-${talhao.talhao}`}>
+          {plantados.map((gadoCorte) => (
+            <li key={`${gadoCorte.id}-${gadoCorte.talhao}`}>
               <label>
                 <input
                   type="checkbox"
-                  checked={talhoesSelecionados.includes(talhao.talhao)}
-                  onChange={() => handleTalhaoSelecionado(talhao.talhao)}
+                  checked={talhoesSelecionados.includes(gadoCorte.talhao)}
+                  onChange={() => handleTalhaoSelecionado(gadoCorte.talhao)}
                 />
-                {talhao.talhao}
+                {gadoCorte.talhao}
               </label>
             </li>
           ))}
         </ul>
       </div>
       <div className="Lista">
-        <ListCafe/>
+        <ListGadoCorte />
       </div>
     </div>
   );
 };
 
-export default CafeList;
+export default GadoCorteList; // Alterado o nome do componente
