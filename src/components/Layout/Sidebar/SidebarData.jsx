@@ -20,5 +20,11 @@ export const SidebarData = [
   {
     title: "Gado Corte",
     link: "/GadoCorteList",
+    
+  },
+  {
+    title: "Gado leite",
+    link: "/GadoLeiteList",
+    
   },
 ];

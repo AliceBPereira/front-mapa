@@ -29,6 +29,7 @@ function Header() {
                 <li><Link to="/MilhoList">Milho</Link></li>
                 <li><Link to="/CaprinoOvinoList">Caprino Ovino</Link></li>
                 <li><Link to="/GadoCorteList">Gado Corte</Link></li>
+                <li><Link to="/GadoLeiteList">Gado Leite</Link></li>
               </ul>
 
             </div>
