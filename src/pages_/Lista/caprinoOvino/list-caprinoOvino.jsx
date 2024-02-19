@@ -20,7 +20,7 @@ const columns = [
 ];
 
 function ListCaprinoOvino() {  // Alterei o nome da função para ListCaprinoOvino
-  const [caprinosOvinos, setCaprinosOvinos] = useState([]);  // Alterei o nome do estado para caprinosOvinos
+  const [caprinoOvinos, setCaprinoOvinos] = useState([]);  // Alterei o nome do estado para caprinosOvinos
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
@@ -31,15 +31,15 @@ function ListCaprinoOvino() {  // Alterei o nome da função para ListCaprinoOvi
 
   let query = useQuery();
 
-  const requestCaprinosOvinos = async () => {  // Alterei o nome da função para requestCaprinosOvinos
+  const requestCaprinoOvinos = async () => {  // Alterei o nome da função para request
     setLoading(true);
     try {
-      const response = await api.get("/caprinosOvinos", {  // Alterei a rota para "/caprinosOvinos"
+      const response = await api.get("/caprinoOvinos", {  // Alterei a rota para "/caprinosOvinos"
         params: {
           nome: query.get("nome"),
         },
       });
-      setCaprinosOvinos(response.data.caprinosOvinos);  // Alterei o nome do estado para caprinosOvinos
+      setCaprinoOvinos(response.data.caprinoOvinos);  // Alterei o nome do estado para caprinosOvinos
     } catch (err) {
       console.log(err);
     } finally {
@@ -48,7 +48,7 @@ function ListCaprinoOvino() {  // Alterei o nome da função para ListCaprinoOvi
   };
 
   useEffect(() => {
-    requestCaprinosOvinos();  // Alterei a chamada da função para requestCaprinosOvinos
+    requestCaprinoOvinos();  // Alterei a chamada da função para request
   }, []);
 
   if (loading) {
@@ -56,30 +56,30 @@ function ListCaprinoOvino() {  // Alterei o nome da função para ListCaprinoOvi
   }
 
   // Função de filtro
-  const filterCaprinosOvinosByStatus = (caprinosOvinos, status) => {  // Alterei o nome da função para filterCaprinosOvinosByStatus
+  const filterCaprinoOvinosByStatus = (caprinoOvinos, status) => {  // Alterei o nome da função para filterCaprinosOvinosByStatus
     if (status === "COLHIDOS") {
-      return caprinosOvinos.filter((caprinoOvino) => caprinoOvino.status === "COLHIDO");
+      return caprinoOvinos.filter((caprinoOvino) => caprinoOvino.status === "COLHIDO");
     } else if (status === "PLANTADOS") {
-      return caprinosOvinos.filter((caprinoOvino) => caprinoOvino.status === "PLANTADO");
+      return caprinoOvinos.filter((caprinoOvino) => caprinoOvino.status === "PLANTADO");
     } else {
-      return caprinosOvinos; // Retorna todos os caprinosOvinos se nenhum status for selecionado
+      return caprinoOvinos; // Retorna todos os  se nenhum status for selecionado
     }
   };
 
-  const filterCaprinosOvinosBySearch = (caprinosOvinos, searchTerm) => {  // Alterei o nome da função para filterCaprinosOvinosBySearch
-    return caprinosOvinos.filter((caprinoOvino) =>
+  const filterCaprinoOvinosBySearch = (caprinoOvinos, searchTerm) => {  // Alterei o nome da função para filterCaprinosOvinosBySearch
+    return caprinoOvinos.filter((caprinoOvino) =>
       caprinoOvino.talhao.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
-  // Atualiza caprinosOvinos com base no filtro
-  const filteredCaprinosOvinos = filterCaprinosOvinosByStatus(caprinosOvinos, filtro);
+  // Atualiza  com base no filtro
+  const filteredCaprinoOvinos = filterCaprinoOvinosByStatus(caprinoOvinos, filtro);
   
-  const searchedCaprinosOvinos = filterCaprinosOvinosBySearch(filteredCaprinosOvinos, search);
+  const searchedCaprinoOvinos = filterCaprinoOvinosBySearch(filteredCaprinoOvinos, search);
 
   return (
     <div className={styles.container}>
-      <h1>CaprinoOvino</h1>  {/* Alterei o título para "CaprinoOvino" */}
+      <h1>CaprinoOvino</h1> 
       <div className={styles.form}>
         
           <select
@@ -103,7 +103,7 @@ function ListCaprinoOvino() {  // Alterei o nome da função para ListCaprinoOvi
 
       <div className={styles.grid}>
         <DataGrid
-          rows={searchedCaprinosOvinos}
+          rows={searchedCaprinoOvinos}
           columns={[
             {
               field: 'details',
