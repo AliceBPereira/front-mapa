@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import Map from './pages_/Map/map';
 import CafePage from './pages_/Detalhes/Cafe/coffee-details';
-import CaprinoOvinoPage from './pages_/Detalhes/CaprinoOvino/CaprinoOvinoPage';
 import Header from './components/Layout/Header/header';
 import GadoCortePage from './pages_/Detalhes/GadoCorte/gadoCortePage';
 import GadoLeitePage from './pages_/Detalhes/GadoLeite/gadoLeitePage';
@@ -18,6 +17,7 @@ import GadoLeiteList from './pages_/Lista/gadoLeite/gadoLeite-metrics';
 
 import styles from './app.module.scss'
 import MilhoDetails from './pages_/Detalhes/Milho/corn-details';
+import CaprinoOvinoPage from './pages_/Detalhes/CaprinoOvino/caprinoOvino-details';
 
 export const router = createBrowserRouter([
   {
