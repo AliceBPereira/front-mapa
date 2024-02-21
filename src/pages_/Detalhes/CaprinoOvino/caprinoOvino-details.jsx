@@ -52,24 +52,11 @@ const CaprinoOvinoDetails = () => {  // Alterei o nome da função para CaprinoO
             </div>
 
             <div>
-              <strong>Espaçamento: </strong>
-              <span>{caprinoOvinoDetails.espacament}</span>
+              <strong>Data de Colheita: </strong>
+              <span>{caprinoOvinoDetails.data_colheita}</span>
             </div>
 
-            <div>
-              <strong>Estande: </strong>
-              <span>{caprinoOvinoDetails.estande}</span>
-            </div>
-
-            <div>
-              <strong>Numero de Plantas: </strong>
-              <span>{caprinoOvinoDetails.n_de_plantas}</span>
-            </div>
-
-            <div>
-              <strong>Ano de Plantio: </strong>
-              <span>{caprinoOvinoDetails.ano_plantio}</span>
-            </div>
+          
           </div>
         </div>
       </div>

@@ -2,10 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 import Map from './pages_/Map/map';
-import CafePage from './pages_/Detalhes/Cafe/coffee-details';
+
 import Header from './components/Layout/Header/header';
-import GadoCortePage from './pages_/Detalhes/GadoCorte/gadoCortePage';
-import GadoLeitePage from './pages_/Detalhes/GadoLeite/gadoLeitePage';
 import PredioPage from './pages_/Detalhes/Predios/Predio';
 import DetalhesListaPage from './pages_/Lista/DetalhesListaPage';
 
@@ -15,9 +13,13 @@ import CaprinoOvinoList from './pages_/Lista/caprinoOvino/caprinoOvino-metrics'
 import GadoCorteList from './pages_/Lista/gadoCorte/gadoCorte-metrics';
 import GadoLeiteList from './pages_/Lista/gadoLeite/gadoLeite-metrics';
 
-import styles from './app.module.scss'
+import CafePage from './pages_/Detalhes/Cafe/coffee-details';
 import MilhoDetails from './pages_/Detalhes/Milho/corn-details';
-import CaprinoOvinoPage from './pages_/Detalhes/CaprinoOvino/caprinoOvino-details';
+import CaprinoOvinoDetails from './pages_/Detalhes/CaprinoOvino/caprinoOvino-details';
+import GadoCorteDetails from './pages_/Detalhes/GadoCorte/gadoCorte-details';
+import GadoLeiteDetails from './pages_/Detalhes/GadoLeite/gadoLeite-details';
+
+import styles from './app.module.scss'
 
 export const router = createBrowserRouter([
   {
@@ -34,16 +36,18 @@ export const router = createBrowserRouter([
   },
   {
     path: '/CaprinoOvinoPage/:id',
-    element: <CaprinoOvinoPage />,
+    element: <CaprinoOvinoDetails />,
   },
   {
-    path: '/GadoCortePage/:id',
-    element: <GadoCortePage />,
+    path: '/GadoCorteDetails/:id',
+    element: <GadoCorteDetails />,
   },
   {
-    path: '/GadoLeitePage/:id',
-    element: <GadoLeitePage />,
+    path: '/GadoLeiteDetails/:id',
+    element: <GadoLeiteDetails />,
   },
+  
+  
   {
     path: '/PredioPage/:id',
     element: <PredioPage />,

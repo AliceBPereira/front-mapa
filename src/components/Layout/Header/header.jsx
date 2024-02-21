@@ -15,7 +15,7 @@ function Header() {
         <ul className="nav">
 
           <li className="listItem">
-            <Link to="/" className="link">Página Inicial</Link>
+            <Link to="/" className="link">Mapa</Link>
           </li>
           <li
             className="listItem"
