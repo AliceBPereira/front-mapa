@@ -48,6 +48,10 @@ const CoffeeDetails = () => {
           <h1>{coffeeDetails.talhao}</h1>
 
           <div className={styles.infoLabels}>
+          <div>
+              <strong>Cultivar: </strong>
+              <span>{coffeeDetails.cultivar}</span>
+            </div>
             <div>
               <strong>Área em Hectares: </strong>
               <span>{coffeeDetails.area_ha}</span>

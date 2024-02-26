@@ -1,7 +1,7 @@
 .container {
   display: flex;
   width: 100vw;
-
+  box-sizing: border-box; 
   h2 {
     margin: 0;
   }
@@ -23,13 +23,13 @@
   gap: 20px;
   flex: 1;
   flex-direction: column;
-
+  box-sizing: border-box; 
 }
 
 .graficoContainer {
   height: 40%; /* Ajuste conforme necessário */
   margin: 20px;
-  
+  box-sizing: border-box; 
 }
 
 .info {
@@ -37,6 +37,7 @@
 }
 
 .info {
+  box-sizing: border-box;
   border-top: 2px solid #ccc;
   display: flex;
   flex-direction: column;
@@ -58,4 +59,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
+}
+@media only screen and (max-width: 768px) {
+  .infoContainer {
+    padding: 10px 5vw; /* Adjust padding for smaller screens */
+  }
 }

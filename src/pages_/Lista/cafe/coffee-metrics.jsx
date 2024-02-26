@@ -95,84 +95,87 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
 
   const options = {
     chart: {
-      title: `Quantidade Colhida de Cafés para os Talhões por Data de Plantio`,
+      title: `Quantidade Colhida de Cafés por hectare para os Talhões por Data de Plantio`,
       subtitle: "em unidades",
     },
     colors: talhoesSelecionados.map(() => getRandomColor()),
   };
 
   function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
+    const colors = ["#66CDAA", "#008080", "#20B2AA", "#90EE90", "#006400", "#32CD32", "#808000","#228B22"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
 
   
   return (
     <div className={styles.container}>
-      <div>
-        <h3>Selecione um tipo de gráfico</h3>
-        <label>
-          <input
-            type="radio"
-            value="Line"
-            checked={chartType === "Line"}
-            onChange={() => handleChartTypeChange("Line")}
-          />
-          Linha
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="Pie"
-            checked={chartType === "Pie"}
-            onChange={() => handleChartTypeChange("Pie")}
-          />
-          Pizza
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="Bar"
-            checked={chartType === "Bar"}
-            onChange={() => handleChartTypeChange("Bar")}
-          />
-          Barras
-        </label>
-      </div>
-      <div className={styles.chart}>
-        {chartData[0].length < 2 ? (
-          <div className={styles.noData}>Sem dados.</div>
-        ) : (
-          <Chart
-            chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
-            width="100%"
-            height="100%"
-            data={chartData}
-            options={options}
-          />
-        )}
-      </div>
-      
-      <div className={styles.selectCoffee}>
-        <h3>Selecione um ou mais talhões plantados:</h3>
-        <ul>
-          {plantados.map((talhao) => (
-            <li key={`${talhao.id}-${talhao.talhao}`}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={talhoesSelecionados.includes(talhao.talhao)}
-                  onChange={() => handleTalhaoSelecionado(talhao.talhao)}
-                />
-                {talhao.talhao}
-              </label>
-            </li>
-          ))}
-        </ul>
+      <h1 className={styles.titulo}>Métricas dos talhões de café</h1>
+      <div className={styles.graph}>
+        <div >
+          <h2>Gráfico</h2>
+          <h3>Selecione um tipo de gráfico</h3>
+          <label>
+            <input
+              type="radio"
+              value="Line"
+              checked={chartType === "Line"}
+              onChange={() => handleChartTypeChange("Line")}
+            />
+            Linha
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Pie"
+              checked={chartType === "Pie"}
+              onChange={() => handleChartTypeChange("Pie")}
+            />
+            Pizza
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Bar"
+              checked={chartType === "Bar"}
+              onChange={() => handleChartTypeChange("Bar")}
+            />
+            Barras
+          </label>
+        </div>
+        <div className={styles.chart}>
+          {chartData[0].length < 2 ? (
+            <div className={styles.noData}>Sem dados.</div>
+          ) : (
+            <Chart
+              chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
+              width="100%"
+              height="100%"
+              data={chartData}
+              options={options}
+            />
+          )}
+        </div>
+        
+        <div className={styles.selectCoffee}>
+          <h3>Selecione um ou mais talhões plantados:</h3>
+          <ul>
+            {plantados.map((talhao) => (
+              <li key={`${talhao.id}-${talhao.talhao}`}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={talhoesSelecionados.includes(talhao.talhao)}
+                    onChange={() => handleTalhaoSelecionado(talhao.talhao)}
+                  />
+                  {talhao.talhao}
+                  
+                </label>
+
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div className="Lista">
         <ListCafe/>
