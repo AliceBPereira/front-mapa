@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { Link } from "react-router-dom";
 
-import styles from './list-gadoLeite.module.scss';  // Alterei o nome do módulo
+import styles from '../style/list.module.scss'  // Alterei o nome do módulo
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },

@@ -4,8 +4,7 @@ import { api } from "../../../lib/axios";
 import Grafico from "./grafico";
 
 import { DetailsMiniMap } from "../../../components/details-mini-map/details-mini-map";
-
-import styles from './caprinoOvino-details.module.scss';  // Alterei o nome do módulo
+import styles from '../style/details.module.scss';  // Alterei o nome do módulo
 
 const CaprinoOvinoDetails = () => {  // Alterei o nome da função para CaprinoOvinoDetails
   const { id } = useParams();

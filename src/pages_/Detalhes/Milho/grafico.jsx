@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
-import styles from './grafico.module.scss'
+import styles from '../style/grafico.module.scss'
 const Grafico = ({ talhaoId }) => {
   const [milhos, setMilhos] = useState([]);
   const [loading, setLoading] = useState(false);

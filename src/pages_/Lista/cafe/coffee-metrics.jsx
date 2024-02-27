@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 import ListCafe from "./list-coffee";
-import styles from './coffee-metrics.module.scss'
-
+import styles from '../style/metrics.module.scss'
+import { DetailsMiniMap } from "../../../components/list-mini-map/list-mini-map";
 const CafeList = () => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -124,15 +124,7 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
             />
             Linha
           </label>
-          <label>
-            <input
-              type="radio"
-              value="Pie"
-              checked={chartType === "Pie"}
-              onChange={() => handleChartTypeChange("Pie")}
-            />
-            Pizza
-          </label>
+          
           <label>
             <input
               type="radio"
@@ -148,7 +140,7 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
             <div className={styles.noData}>Sem dados.</div>
           ) : (
             <Chart
-              chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
+              chartType={chartType === "Line" ?  "PieChart" : "BarChart"}
               width="100%"
               height="100%"
               data={chartData}
@@ -169,6 +161,7 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
                     onChange={() => handleTalhaoSelecionado(talhao.talhao)}
                   />
                   {talhao.talhao}
+                 
                   
                 </label>
 

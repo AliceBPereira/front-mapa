@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 import ListGadoLeite from "./list-gadoLeite";  // Alterando o nome do componente
-import styles from './gadoLeite-metrics.module.scss'  // Alterando o nome do módulo
+import styles from '../style/metrics.module.scss' // Alterando o nome do módulo
 
 const GadoLeiteList = () => {  // Alterando o nome da função
   const [gadosLeite, setGadosLeite] = useState([]);  // Alterando o nome do estado
@@ -111,66 +111,67 @@ const GadoLeiteList = () => {  // Alterando o nome da função
 
   return (
     <div className={styles.container}>
-      <div>
-        <h3>Selecione um tipo de gráfico</h3>
-        <label>
-          <input
-            type="radio"
-            value="Line"
-            checked={chartType === "Line"}
-            onChange={() => handleChartTypeChange("Line")}
-          />
-          Linha
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="Pie"
-            checked={chartType === "Pie"}
-            onChange={() => handleChartTypeChange("Pie")}
-          />
-          Pizza
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="Bar"
-            checked={chartType === "Bar"}
-            onChange={() => handleChartTypeChange("Bar")}
-          />
-          Barras
-        </label>
-      </div>
-      <div className={styles.chart}>
-        {chartData[0].length < 2 ? (
-          <div className={styles.noData}>Sem dados.</div>
-        ) : (
-          <Chart
-            chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
-            width="100%"
-            height="100%"
-            data={chartData}
-            options={options}
-          />
-        )}
-      </div>
-
-      <div className={styles.selectCoffee}>
-        <h3>Selecione um ou mais talhões plantados:</h3>
-        <ul>
-          {plantados.map((talhao) => (
-            <li key={`${talhao.id}-${talhao.talhao}`}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={talhoesSelecionados.includes(talhao.talhao)}
-                  onChange={() => handleTalhaoSelecionado(talhao.talhao)}
-                />
-                {talhao.talhao}
-              </label>
-            </li>
-          ))}
-        </ul>
+      <div className={styles.graph}>
+        <div>
+          <h3>Selecione um tipo de gráfico</h3>
+          <label>
+            <input
+              type="radio"
+              value="Line"
+              checked={chartType === "Line"}
+              onChange={() => handleChartTypeChange("Line")}
+            />
+            Linha
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Pie"
+              checked={chartType === "Pie"}
+              onChange={() => handleChartTypeChange("Pie")}
+            />
+            Pizza
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Bar"
+              checked={chartType === "Bar"}
+              onChange={() => handleChartTypeChange("Bar")}
+            />
+            Barras
+          </label>
+        </div>
+        <div className={styles.chart}>
+          {chartData[0].length < 2 ? (
+            <div className={styles.noData}>Sem dados.</div>
+          ) : (
+            <Chart
+              chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
+              width="100%"
+              height="100%"
+              data={chartData}
+              options={options}
+            />
+          )}
+        </div>
+        <div className={styles.selectCoffee}>
+          <h3>Selecione um ou mais talhões plantados:</h3>
+          <ul>
+            {plantados.map((talhao) => (
+              <li key={`${talhao.id}-${talhao.talhao}`}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={talhoesSelecionados.includes(talhao.talhao)}
+                    onChange={() => handleTalhaoSelecionado(talhao.talhao)}
+                  />
+                  {talhao.talhao}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div className="Lista">
         <ListGadoLeite />  {/* Alterando o nome do componente */}

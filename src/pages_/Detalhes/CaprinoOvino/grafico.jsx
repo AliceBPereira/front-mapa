@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 
-import styles from './grafico.module.scss';  // Alterei o nome do módulo
+import styles from '../style/grafico.module.scss' // Alterei o nome do módulo
 
 const Grafico = ({ talhaoId }) => {
   const [caprinosOvinos, setCaprinosOvinos] = useState([]);  // Alterei o nome do estado para caprinosOvinos

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 import ListMilho from "./list-milho";  // Importando o componente ListMilho
-import styles from './milho-metrics.module.scss'
+import styles from '../style/metrics.module.scss'
 
 const MilhoList = () => {  // Alterando o nome da função para MilhoList
   const [milhos, setMilhos] = useState([]);  // Alterando o nome do estado para milhos
@@ -111,7 +111,7 @@ const MilhoList = () => {  // Alterando o nome da função para MilhoList
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.graph}>
         <h3>Selecione um tipo de gráfico</h3>
         <label>
           <input
@@ -140,7 +140,7 @@ const MilhoList = () => {  // Alterando o nome da função para MilhoList
           />
           Barras
         </label>
-      </div>
+      
       <div className={styles.chart}>
         {chartData[0].length < 2 ? (
           <div className={styles.noData}>Sem dados.</div>
@@ -171,6 +171,7 @@ const MilhoList = () => {  // Alterando o nome da função para MilhoList
             </li>
           ))}
         </ul>
+      </div>
       </div>
       <div className="Lista">
         <ListMilho />  {/* Renderizando o componente ListMilho */}

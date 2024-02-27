@@ -5,8 +5,7 @@ import { api } from "../../../lib/axios";
 import { DataGrid } from '@mui/x-data-grid';
 
 import { Link } from "react-router-dom";
-
-import styles from './list-gadoCorte.module.scss'
+import styles from '../style/list.module.scss'
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },

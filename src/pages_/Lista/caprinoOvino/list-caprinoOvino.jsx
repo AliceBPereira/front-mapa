@@ -6,7 +6,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { Link } from "react-router-dom";
 
-import styles from './list-caprinoOvino.module.scss'  // Alterei o nome do arquivo de estilo
+import styles from '../style/list.module.scss'  // Alterei o nome do arquivo de estilo
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },

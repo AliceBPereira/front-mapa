@@ -5,7 +5,7 @@ import Grafico from "./grafico";
 
 import { DetailsMiniMap } from "../../../components/details-mini-map/details-mini-map";
 
-import styles from './gadoCorte-details.module.scss';
+import styles from '../style/details.module.scss';
 
 const GadoCorteDetails = () => {
   const { id } = useParams();

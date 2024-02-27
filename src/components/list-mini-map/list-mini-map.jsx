@@ -1,6 +1,6 @@
 import { LayersControl, MapContainer, Polygon, TileLayer } from "react-leaflet"
 
-import styles from './details-mini-map.styles.module.scss'
+import styles from './list-mini-map.styles.module.scss'
 
 const { BaseLayer } = LayersControl;
 
