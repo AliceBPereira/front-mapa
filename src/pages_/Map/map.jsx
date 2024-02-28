@@ -6,7 +6,7 @@ import {
   LayerGroup,
 } from "react-leaflet";
 import "./map.css";
-
+import UsuarioMarkers from "../../components/Markers/marker-usuario"
 import LocalMarkers from "../../components/Markers/MarkerPredios";
 import MilhoPolygons from "../../components/Poligonos/MilhoPoligono";
 import CafePolygons from "../../components/Poligonos/cafe/CafePoligono";
@@ -65,6 +65,11 @@ function Map() {
             <Overlay name="Prédios" checked>
               <LayerGroup>
                 <LocalMarkers />
+              </LayerGroup>
+            </Overlay>
+            <Overlay name="usuario" checked>
+              <LayerGroup>
+                <UsuarioMarkers />
               </LayerGroup>
             </Overlay>
             <Overlay name="Milho" checked>

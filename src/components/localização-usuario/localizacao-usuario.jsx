@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const LocationExample = () => {
+export const LocationExample = () => {
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -32,4 +32,3 @@ const LocationExample = () => {
   );
 };
 
-export default LocationExample;
