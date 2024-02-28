@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 import ListCafe from "./list-coffee";
 import styles from '../style/metrics.module.scss'
-import { DetailsMiniMap } from "../../../components/list-mini-map/list-mini-map";
+import { ListMiniMap } from "../../../components/list-mini-map/list-mini-map";
 const CafeList = () => {
   const [cafes, setCafes] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -161,10 +161,12 @@ Object.keys(dadosPorTalhao).forEach((talhao) => {
                     onChange={() => handleTalhaoSelecionado(talhao.talhao)}
                   />
                   {talhao.talhao}
-                 
+                  
                   
                 </label>
-
+                <div>
+                  <ListMiniMap coordinates={talhao.localizacao.coordenadas}/>
+                 </div>
               </li>
             ))}
           </ul>

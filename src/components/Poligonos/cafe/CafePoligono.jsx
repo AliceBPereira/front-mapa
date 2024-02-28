@@ -37,7 +37,7 @@ const CafePolygons = () => {
         <Polygon
           key={cafe.id}
           pathOptions={greenOptions}
-          positions={cafe.localizacao?.coordenadas}
+          positions={cafe.localizacao.coordenadas}
 
         >
           <Popup>

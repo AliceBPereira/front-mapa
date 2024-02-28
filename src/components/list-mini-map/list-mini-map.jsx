@@ -4,7 +4,7 @@ import styles from './list-mini-map.styles.module.scss'
 
 const { BaseLayer } = LayersControl;
 
-export const DetailsMiniMap = ({ coordinates  }) => {
+export const ListMiniMap = ({ coordinates  }) => {
   return (
     <div className={styles.mapContainer}>
       <MapContainer center={coordinates[0]} zoom={24}>
