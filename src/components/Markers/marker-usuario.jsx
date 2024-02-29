@@ -2,14 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { Link } from "react-router-dom";
-import { api } from "../../lib/axios";
-import markeredificios from "../Icon/pino-de-localizacao (1).png";
- // Importe o componente LocationExample
-import "./LocalMarkers.css"; // Importa o arquivo CSS
+
+import markerusuario from "../Icon/ponto.png";
+
+import "./LocalMarkers.css"; 
 
 const Iconlugar = new L.Icon({
-  iconUrl: markeredificios,
+  iconUrl: markerusuario,
   popupAnchor: [-0, -0],
   iconSize: [32, 32],
 });
