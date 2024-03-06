@@ -19,41 +19,9 @@ const columns = [
   { field: 'status', headerName: 'Status', width: 150 }, // Adicione a coluna de status
 ];
 
-function ListCafe() {
-  const [cafes, setCafes] = useState([]);
-  const [loading, setLoading] = useState(false);
+function ListCafe({ cafes }) {
   const [search, setSearch] = useState("");
   const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
-
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
-
-  let query = useQuery();
-
-  const requestCafes = async () => {
-    setLoading(true);
-    try {
-      const response = await api.get("/cafes", {
-        params: {
-          nome: query.get("nome"),
-        },
-      });
-      setCafes(response.data.cafes);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    requestCafes();
-  }, []);
-
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
 
   // Função de filtro
   const filterCafesByStatus = (cafes, status) => {

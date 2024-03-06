@@ -4,10 +4,10 @@ import styles from './list-mini-map.styles.module.scss'
 
 const { BaseLayer } = LayersControl;
 
-export const ListMiniMap = ({ coordinates  }) => {
+export const ListMiniMap = ({ coordinates = [] }) => {
   return (
     <div className={styles.mapContainer}>
-      <MapContainer center={coordinates[0]} zoom={24}>
+      <MapContainer center={coordinates?.[0]?.[0]} zoom={24}>
         <TileLayer
           attribution='&copy; <a href="https://www.maptiler.com/">MapTiler</a> &copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
@@ -23,11 +23,15 @@ export const ListMiniMap = ({ coordinates  }) => {
               />
             </BaseLayer>
 
-            <Polygon
-              positions={coordinates}
-            >
-          </Polygon >
-    
+            {
+              coordinates.map((coordinate, index) => (
+                <Polygon
+                  key={`${coordinate[0]}-${index}`}
+                  positions={coordinate}
+                />
+              ))
+            }
+            
           </LayersControl>
        
       </MapContainer>

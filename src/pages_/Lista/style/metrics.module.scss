@@ -5,15 +5,20 @@
   flex-direction: column;
   box-sizing: border-box; 
 }
-.titulo{
-  color: rgb(109, 109, 109);
-}
-.graph {
+
+.content {
   background-color: #f3f2f2;
   border-radius: 20px;
   padding: 15px;
   box-sizing: border-box; 
+  display: flex;
+}
 
+.titulo{
+  color: rgb(109, 109, 109);
+}
+.graph {
+  width: 50%;
 }
 .chart {
   margin-top: 20px;
@@ -36,6 +41,11 @@
   color: #aaa
 }
 
+.map {
+  background-color: #aaa;
+  width: 50%;
+}
+
 .selectCoffee {
   
   li {
@@ -47,6 +57,5 @@
   ul {
     margin: 0;
     padding: 0;
-  
   }
 }
