@@ -5,7 +5,7 @@
   color: black;
   justify-content: space-between;
   width: 100%;
-  height: 6vh;
+  height: 9vh;
   z-index: 1000;
 }
 
@@ -31,6 +31,7 @@
   text-decoration: none;
   color: rgb(255, 255, 255);
   font-family: Verdana, sans-serif; /* Altere 'Verdana' para a fonte desejada */
+  font-size: 16px;
 }
 
 /* Estilo para o submenu */
@@ -64,4 +65,15 @@
 
 .listItem-active {
   display: flex;
+}
+.logo{
+  display: flex ;
+  font-size: 30px;
+  padding-left: 10px;
+  
+}
+.imglogo{
+  margin-right: 10px;
+  width: 40px;
+  height: 40px; 
 }

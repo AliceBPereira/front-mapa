@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import { api } from "../../../lib/axios";
 import ListMilho from "./list-milho";  // Importando o componente ListMilho
-import styles from '../style/metrics.module.scss'
+import styles from '../style/metrics.module.scss';
+import { ListMiniMap } from "../../../components/list-mini-map/list-mini-map";
+
 
 const MilhoList = () => {  // Alterando o nome da função para MilhoList
   const [milhos, setMilhos] = useState([]);  // Alterando o nome do estado para milhos
@@ -61,7 +63,7 @@ const MilhoList = () => {  // Alterando o nome da função para MilhoList
     if (!dadosPorTalhao[milho.talhao]) {
       dadosPorTalhao[milho.talhao] = { anos: [], quantidades: [] };
     }
-    dadosPorTalhao[milho.talhao].anos.push(milho.ano_plantio.toString());
+    dadosPorTalhao[milho.talhao].anos.push(milho.periodo.toString());
     dadosPorTalhao[milho.talhao].quantidades.push(milho.quantidade_colhida);
   });
 
@@ -92,90 +94,85 @@ const MilhoList = () => {  // Alterando o nome da função para MilhoList
     });
   }
 
+  const coordenadas = talhoesFiltrados.map(talhao => talhao.localizacao.coordenadas)
+  
   const options = {
-    chart: {
-      title: `Quantidade Colhida de Milhos para os Talhões por Data de Plantio`,
-      subtitle: "em unidades",
-    },
-    colors: talhoesSelecionados.map(() => getRandomColor()),
+    title: `Quantidade Colhida de Milho em carretas`,
   };
-
-  function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
   return (
     <div className={styles.container}>
-      <div className={styles.graph}>
-        <h3>Selecione um tipo de gráfico</h3>
-        <label>
-          <input
-            type="radio"
-            value="Line"
-            checked={chartType === "Line"}
-            onChange={() => handleChartTypeChange("Line")}
-          />
-          Linha
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="Pie"
-            checked={chartType === "Pie"}
-            onChange={() => handleChartTypeChange("Pie")}
-          />
-          Pizza
-        </label>
-        <label>
-          <input
-            type="radio"
-            value="Bar"
-            checked={chartType === "Bar"}
-            onChange={() => handleChartTypeChange("Bar")}
-          />
-          Barras
-        </label>
+      <h1 className={styles.titulo}>Métricas dos talhões de milho</h1>
+      <div className={styles.content}>
+        <div className={styles.graph}>
+          <h3>Selecione um tipo de gráfico</h3>
+          <label>
+            <input
+              type="radio"
+              value="Line"
+              checked={chartType === "Line"}
+              onChange={() => handleChartTypeChange("Line")}
+            />
+            Linha
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Pie"
+              checked={chartType === "Pie"}
+              onChange={() => handleChartTypeChange("Pie")}
+            />
+            Pizza
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Bar"
+              checked={chartType === "Bar"}
+              onChange={() => handleChartTypeChange("Bar")}
+            />
+            Barras
+          </label>
+        
+        <div className={styles.chart}>
+          {chartData[0].length < 2 ? (
+            <div className={styles.noData}>Sem dados.</div>
+          ) : (
+            <Chart
+              chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
+              width="100%"
+              height="100%"
+              data={chartData}
+              options={options}
+            />
+          )}
+        </div>
+        <div className={styles.selectCoffee}>
+          <h3>Selecione um ou mais talhões plantados:</h3>
+          <ul>
+            {plantados.map((talhao) => (
+              <li key={`${talhao.id}-${talhao.talhao}`}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={talhoesSelecionados.includes(talhao.talhao)}
+                    onChange={() => handleTalhaoSelecionado(talhao.talhao)}
+                  />
+                  {talhao.talhao}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        </div>
+        <div className={styles.map}>
+            { talhoesFiltrados.length > 0 && (<ListMiniMap coordinates={coordenadas}/>) }
+        </div>
+        </div>
+        <div className="Lista">
+          <ListMilho milhos={milhos}/>  {/* Renderizando o componente ListMilho */}
+        </div>
       
-      <div className={styles.chart}>
-        {chartData[0].length < 2 ? (
-          <div className={styles.noData}>Sem dados.</div>
-        ) : (
-          <Chart
-            chartType={chartType === "Line" ? "LineChart" : chartType === "Pie" ? "PieChart" : "BarChart"}
-            width="100%"
-            height="100%"
-            data={chartData}
-            options={options}
-          />
-        )}
-      </div>
-
-      <div className={styles.selectCoffee}>
-        <h3>Selecione um ou mais talhões plantados:</h3>
-        <ul>
-          {plantados.map((talhao) => (
-            <li key={`${talhao.id}-${talhao.talhao}`}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={talhoesSelecionados.includes(talhao.talhao)}
-                  onChange={() => handleTalhaoSelecionado(talhao.talhao)}
-                />
-                {talhao.talhao}
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
-      </div>
-      <div className="Lista">
-        <ListMilho />  {/* Renderizando o componente ListMilho */}
-      </div>
     </div>
   );
 };

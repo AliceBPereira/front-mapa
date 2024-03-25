@@ -59,21 +59,18 @@ const MilhoDetails = () => {
                   <span>{milhoDetails.sementes}</span>
                 </div>
                 <div>
-                  <strong>Produção tha: </strong>
-                  <span>{milhoDetails.prod_tha}</span>
+                  <strong>Quantidade Colhida: </strong>
+                  <span>{milhoDetails.quantidade_colhida}</span>
                 </div>
                 <div>
-                  <strong>Produção de 2020: </strong>
-                  <span>{milhoDetails.prod_2020}</span>
+                  <strong>Periodo: </strong>
+                  <span>{milhoDetails.periodo}</span>
                 </div>
                 <div>
-                  <strong>Plantio de 2021: </strong>
-                  <span>{milhoDetails.plantio_21}</span>
+                  <strong>Trabalho Realizado: </strong>
+                  <span>{milhoDetails.trabalho_realizado}</span>
                 </div>
-                <div>
-                  <strong>Plantio de 2020: </strong>
-                  <span>{milhoDetails.plantio_20}</span>
-                </div>
+                
               </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { api } from "../../../lib/axios";
+
 
 import { DataGrid } from '@mui/x-data-grid';
 
@@ -19,41 +18,9 @@ const columns = [
   { field: 'status', headerName: 'Status', width: 150 }, // Adicione a coluna de status
 ];
 
-function ListMilho() {  // Alterei o nome da função para ListMilho
-  const [milhos, setMilhos] = useState([]);  // Alterei o nome do estado para milhos
-  const [loading, setLoading] = useState(false);
+function ListMilho({ milhos }) {  // Alterei o nome da função para ListMilho
   const [search, setSearch] = useState("");
   const [filtro, setFiltro] = useState("PLANTADOS"); // Inicialmente, configurado como "PLANTADOS"
-
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
-
-  let query = useQuery();
-
-  const requestMilhos = async () => {  // Alterei o nome da função para requestMilhos
-    setLoading(true);
-    try {
-      const response = await api.get("/milhos", {  // Alterei a rota para "/milhos"
-        params: {
-          nome: query.get("nome"),
-        },
-      });
-      setMilhos(response.data.milhos);  // Alterei o nome do estado para milhos
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    requestMilhos();  // Alterei a chamada da função para requestMilhos
-  }, []);
-
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
 
   // Função de filtro
   const filterMilhosByStatus = (milhos, status) => {  // Alterei o nome da função para filterMilhosByStatus
@@ -135,4 +102,4 @@ function ListMilho() {  // Alterei o nome da função para ListMilho
   );
 }
 
-export default ListMilho;  // Alterei o nome da exportação para ListMilho
+export default ListMilho;  

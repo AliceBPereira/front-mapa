@@ -63,14 +63,10 @@ const MilhoPolygons = () => {
                 <span>{lastTalhao.sist_plant}</span>
                 <strong>Sementes: </strong>
                 <span>{lastTalhao.sementes}</span>
-                <strong>Produção tha: </strong>
-                <span>{lastTalhao.prod_tha}</span>
-                <strong>Produção de 2020: </strong>
-                <span>{lastTalhao.prod_2020}</span>
-                <strong>Plantio de 2021: </strong>
-                <span>{lastTalhao.plantio_21}</span>
-                <strong>Plantio de 2020: </strong>
-                <span>{lastTalhao.plantio_20}</span>
+                <strong>Quantidade Colhida: </strong>
+                <span>{lastTalhao.quantidade_colhida}</span>
+                <strong>Periodo de plantação: </strong>
+                <span>{lastTalhao.periodo}</span>
               </div>
             </PopUpMark>
           </Popup>
