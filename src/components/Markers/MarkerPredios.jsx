@@ -1,11 +1,11 @@
-// LocalMarkers.jsx
 import React, { useEffect, useState } from "react";
 import { Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { Link } from "react-router-dom";
+import { DetailsButton } from "../details-button/details-button";
 import { api } from "../../lib/axios";
 import markeredificios from "../Icon/pino-de-localizacao (1).png";
 import "./LocalMarkers.css"; // Importa o arquivo CSS
+import styles from './styles.module.scss'
 
 const Iconlugar = new L.Icon({
   iconUrl: markeredificios,
@@ -42,21 +42,22 @@ const LocalMarkers = () => {
       {predios.map((predio) => (
         <Marker key={predio.id} icon={Iconlugar} position={predio.localizacao}>
           <Popup>
-            <div className="markerPopup">
+            <div className={styles.info}>
               <div>
-                <Link to={`/CafePage/${predio.id}`} className="markerPopupLink">
-                  <button className="markerPopupButton">
-                    Detalhes
-                  </button>
-                </Link>
+              <div>
+                <DetailsButton url={`/PredioPage/${predio.id}`} />
+              </div>
               </div>
               <div>
                 <strong>Predio:</strong>
                 <span>{predio.nome}</span>
               </div>
               <div>
-                <strong>Área em Hectares: </strong>
-                <span>{predio.area_ha}</span>
+                <strong>Descrição: </strong>
+                <span>{predio.descricao}</span>
+              </div>
+              <div className="popupImageContainer">
+                <img src={predio.img} alt="Imagem do predio" className="popupImage" />
               </div>
             </div>
           </Popup>

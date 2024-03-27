@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Polygon, Popup } from "react-leaflet";
-import { MilhoInfo } from "../Informations/MilhoInfo";
 import { api } from "../../lib/axios";
-import { Link } from "react-router-dom";
 import { DetailsButton } from "../details-button/details-button";
 import { PopUpMark } from "../popup-mark/popup-mark";
 

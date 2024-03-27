@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { api } from "../../../lib/axios";
-
+import { DetailsMiniMapPredio } from "../../../components/details-mini-map-predio/details-mini-map-predio";
+import styles from '../style/details.module-predio.scss';
 
 const PredioPage = () => {
   const { id } = useParams();
@@ -25,27 +26,26 @@ const PredioPage = () => {
   }
 
   return (
-    <>
-    
-      <div>
-        <h1>{predioDetails.talhao}</h1>
-        <div>
-      
-          <strong>Área em Hectares: </strong>
-          <span>{predioDetails.area_ha}</span>
-          <strong>Espaçamento: </strong>
-          <span>{predioDetails.espacament}</span>
-          <strong>Estande: </strong>
-          <span>{predioDetails.estande}</span>
-          <strong>Numero de Plantas: </strong>
-          <span>{predioDetails.n_de_plantas}</span>
-          <strong>Ano de Plantio: </strong>
-          <span>{predioDetails.ano_plantio}</span>
+    <div className={styles.container}>
+      {/* <div className={styles.mapContainer}>
+        <DetailsMiniMapPredio coordinate={predioDetails.localizacao}/>
+      </div> */}
+
+      <div className={styles.infoContainer}>
+        <h2>Detalhes do prédio: {predioDetails.nome}</h2>
+
+        <div className={styles.info}>
+          <h1>{predioDetails.nome}</h1>
+          <div className={styles.details}>
+            <strong>Detalhes: </strong>
+            <span>{predioDetails.detalhes}</span>
+          </div>
+          <div className={styles.imageContainer}>
+            <img src={predioDetails.img} alt="imagem do predio" />
+          </div>
         </div>
       </div>
-   
-      
-    </>
+    </div>
   );
 };
 

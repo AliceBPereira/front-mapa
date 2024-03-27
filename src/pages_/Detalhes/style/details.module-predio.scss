@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  box-sizing: border-box; 
+  padding: 20px;
+}
+
+.infoContainer {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box; 
+}
+
+.info {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+h2 {
+  margin: 0;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+span {
+  margin-right: 5px;
+}
+
+.imageContainer {
+  margin-top: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
